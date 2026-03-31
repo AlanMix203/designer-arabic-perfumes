@@ -78,7 +78,6 @@
 
 .gold-frame-outer {
   border: 1px solid hsl(var(--gold-dark));
-  padding: 8px;
 }
 
 /* Gold gradient text */
