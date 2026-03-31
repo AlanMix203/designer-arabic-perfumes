@@ -6,15 +6,14 @@ const seasonLabels = {
 
 const PerfumeCard = ({ perfume }) => {
   return (
-    <div className="perfume-card-3d">
-      <div className="perfume-inner rounded-lg overflow-hidden border border-border bg-card p-5">
+    <div className="rounded-lg overflow-hidden border border-border bg-card p-5">
         {/* Bottle */}
         <div className="flex justify-center mb-4 h-56 items-center overflow-hidden">
           <img
             src={perfume.image}
             alt={perfume.name}
             loading="lazy"
-            className="bottle-3d h-52 w-auto object-contain"
+            className="h-52 w-auto object-contain"
           />
         </div>
 
