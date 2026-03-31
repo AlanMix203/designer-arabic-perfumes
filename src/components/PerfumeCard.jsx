@@ -64,7 +64,6 @@ const PerfumeCard = ({ perfume }) => {
             </span>
           </div>
         </div>
-      </div>
     </div>
   );
 };
