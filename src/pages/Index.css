@@ -12,10 +12,65 @@
 .marco-neon {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
-  border: 2px solid #dfff00;
+  border: 3px solid #FFD700;
   pointer-events: none;
   z-index: 9999;
-  box-shadow: inset 0 0 30px rgba(223, 255, 0, 0.08);
+  box-shadow: inset 0 0 40px rgba(255, 215, 0, 0.12), 0 0 20px rgba(255, 215, 0, 0.15);
+}
+
+/* ===== HERO LOGO ===== */
+.hero-logo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.hero-logo-wrapper {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid #333;
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.05);
+}
+
+.hero-logo-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-logo-img {
+  width: 100%;
+  height: 100%;
+}
+
+.hero-logo-text {
+  margin-top: 4px;
+}
+
+.hero-brand-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  color: #fff;
+  letter-spacing: 0.4em;
+  font-weight: 400;
+}
+
+.hero-tagline span {
+  font-size: 0.65rem;
+  color: #666;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.hero-line {
+  width: 40px;
+  height: 1px;
+  background: #333;
+  margin-top: 8px;
 }
 
 /* ===== TOP BAR ===== */
