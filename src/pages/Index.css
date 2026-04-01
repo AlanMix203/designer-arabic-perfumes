@@ -12,10 +12,65 @@
 .marco-neon {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
-  border: 2px solid #dfff00;
+  border: 3px solid #FFD700;
   pointer-events: none;
   z-index: 9999;
-  box-shadow: inset 0 0 30px rgba(223, 255, 0, 0.08);
+  box-shadow: inset 0 0 40px rgba(255, 215, 0, 0.12), 0 0 20px rgba(255, 215, 0, 0.15);
+}
+
+/* ===== HERO LOGO ===== */
+.hero-logo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.hero-logo-wrapper {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid #333;
+  box-shadow: 0 0 30px rgba(255, 255, 255, 0.05);
+}
+
+.hero-logo-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-logo-img {
+  width: 100%;
+  height: 100%;
+}
+
+.hero-logo-text {
+  margin-top: 4px;
+}
+
+.hero-brand-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  color: #fff;
+  letter-spacing: 0.4em;
+  font-weight: 400;
+}
+
+.hero-tagline span {
+  font-size: 0.65rem;
+  color: #666;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.hero-line {
+  width: 40px;
+  height: 1px;
+  background: #333;
+  margin-top: 8px;
 }
 
 /* ===== TOP BAR ===== */
@@ -861,5 +916,253 @@ footer {
   .footer-links {
     flex-direction: column;
     gap: 12px;
+  }
+}
+
+/* ===== MASCULINO SECTION ===== */
+.masculino-section {
+  padding: 80px 20px;
+  background: #080808;
+  text-align: center;
+}
+
+.masculino-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 30px;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+/* ===== PRODUCT CARD (Reference Style) ===== */
+.product-card {
+  background: #0e0e0e;
+  border: 1px solid #1a1a1a;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.4s ease;
+  overflow: hidden;
+}
+
+.product-card:hover {
+  border-color: #333;
+  background: #111;
+}
+
+.product-card-img {
+  width: 100%;
+  height: 260px;
+  overflow: hidden;
+  background: #0a0a0a;
+}
+
+.product-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: grayscale(15%);
+  transition: filter 0.4s, transform 0.4s;
+}
+
+.product-card:hover .product-card-img img {
+  filter: grayscale(0%);
+  transform: scale(1.03);
+}
+
+.product-card-info {
+  padding: 24px;
+  text-align: left;
+}
+
+.product-card-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  color: #fff;
+  font-weight: 600;
+  margin: 0 0 4px;
+  letter-spacing: 0.02em;
+}
+
+.product-card-stars {
+  color: #FFD700;
+  font-size: 0.85rem;
+  margin-bottom: 2px;
+}
+
+.star-count {
+  color: #666;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.75rem;
+}
+
+.product-card-brand {
+  color: #888;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-family: 'Montserrat', sans-serif;
+  margin: 0 0 20px;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.sizes-label {
+  color: #fff;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  margin: 0 0 10px;
+}
+
+.sizes-buttons {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.size-btn {
+  padding: 10px 18px;
+  background: transparent;
+  border: 1px solid #333;
+  color: #999;
+  font-size: 0.75rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.size-btn:hover {
+  border-color: #666;
+  color: #fff;
+}
+
+.size-btn.size-active {
+  border-color: #fff;
+  color: #fff;
+  background: transparent;
+}
+
+.price-label {
+  color: #fff;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  margin: 0 0 4px;
+}
+
+.price-value {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  color: #fff;
+  font-weight: 400;
+  margin: 0 0 20px;
+}
+
+.price-value sup {
+  font-size: 0.9rem;
+  vertical-align: super;
+}
+
+.qty-label {
+  color: #fff;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  margin: 0 0 8px;
+}
+
+.qty-controls {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid #333;
+  margin-bottom: 20px;
+}
+
+.qty-controls button {
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: none;
+  color: #999;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.qty-controls button:hover {
+  color: #fff;
+}
+
+.qty-controls span {
+  width: 40px;
+  text-align: center;
+  color: #fff;
+  font-size: 0.95rem;
+  font-family: 'Montserrat', sans-serif;
+  border-left: 1px solid #333;
+  border-right: 1px solid #333;
+  line-height: 40px;
+}
+
+.product-card-add {
+  width: 100%;
+  padding: 14px;
+  background: #fff;
+  color: #080808;
+  border: none;
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  font-weight: 600;
+  font-size: 0.75rem;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  transition: all 0.3s;
+  margin-bottom: 20px;
+}
+
+.product-card-add:hover {
+  background: #FFD700;
+  color: #080808;
+}
+
+.product-card-features {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-top: 16px;
+  border-top: 1px solid #1a1a1a;
+}
+
+.feature-line {
+  color: #888;
+  font-size: 0.8rem;
+  font-family: 'Montserrat', sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.stock-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #4ade80;
+  display: inline-block;
+}
+
+@media (max-width: 768px) {
+  .masculino-grid {
+    grid-template-columns: 1fr;
+    padding: 0;
+  }
+  
+  .sizes-buttons {
+    flex-wrap: wrap;
   }
 }
