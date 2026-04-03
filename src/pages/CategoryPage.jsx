@@ -56,6 +56,7 @@ const CategoryPage = ({ title, subtitle, perfumes }) => {
               precio5ml={p.precio5ml}
               precio10ml={p.precio10ml}
               imagen={p.imagen}
+              video={p.video}
               onAgregar={agregarProductCard}
             />
           ))}
