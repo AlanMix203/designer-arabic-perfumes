@@ -3,7 +3,7 @@ import avixLogo from "@/assets/avix-logo.png";
 const HeroSection = () => {
   return (
     <div className="hero-logo-container">
-      <div className="hero-logo-wrapper">
+      <div className="hero-logo-wrapper hero-logo-glow">
         <img src={avixLogo} alt="AVIX Logo" className="hero-logo-img" />
       </div>
       <div className="hero-logo-text">

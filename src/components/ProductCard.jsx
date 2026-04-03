@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 
-const ProductCard = ({ nombre, marca, precio2ml, precio5ml, precio10ml, imagen, onAgregar }) => {
+const ProductCard = ({ nombre, marca, precio2ml, precio5ml, precio10ml, imagen, video, onAgregar }) => {
   const sizes = [
     { label: "2ML", ml: "2ml", price: precio2ml },
     { label: "5ML", ml: "5ml", price: precio5ml },
@@ -9,6 +9,8 @@ const ProductCard = ({ nombre, marca, precio2ml, precio5ml, precio10ml, imagen, 
 
   const [selectedSize, setSelectedSize] = useState(1);
   const [cantidad, setCantidad] = useState(1);
+  const [isHovering, setIsHovering] = useState(false);
+  const videoRef = useRef(null);
 
   const currentSize = sizes[selectedSize];
 
@@ -18,10 +20,44 @@ const ProductCard = ({ nombre, marca, precio2ml, precio5ml, precio10ml, imagen, 
     }
   };
 
+  const handleMouseEnter = () => {
+    setIsHovering(true);
+    if (videoRef.current) {
+      videoRef.current.play().catch(() => {});
+    }
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovering(false);
+    if (videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0;
+    }
+  };
+
   return (
     <div className="product-card">
-      <div className="product-card-img">
-        <img src={imagen} alt={nombre} />
+      <div
+        className="product-card-img"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
+        <img
+          src={imagen}
+          alt={nombre}
+          style={{ opacity: isHovering && video ? 0 : 1 }}
+        />
+        {video && (
+          <video
+            ref={videoRef}
+            src={video}
+            muted
+            loop
+            playsInline
+            className="product-card-video"
+            style={{ opacity: isHovering ? 1 : 0 }}
+          />
+        )}
       </div>
       <div className="product-card-info">
         <h3 className="product-card-name">{nombre}</h3>
