@@ -264,7 +264,7 @@ const Index = () => {
               width="100%"
               height="300"
               style={{ border: 0, filter: 'grayscale(100%) invert(92%) contrast(83%)' }}
-              allowFullScreen=""
+              allowFullScreen
               loading="lazy"
               title="Ubicación Parfam Avix"
             ></iframe>
