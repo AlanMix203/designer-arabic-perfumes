@@ -1,9 +1,8 @@
 import { useState } from "react";
 
-const ProductCard = ({ nombre, marca, precio2ml, precio3ml, precio5ml, precio10ml, imagen, onAgregar }) => {
+const ProductCard = ({ nombre, marca, precio2ml, precio5ml, precio10ml, imagen, onAgregar }) => {
   const sizes = [
     { label: "2ML", ml: "2ml", price: precio2ml },
-    { label: "3ML", ml: "3ml", price: precio3ml },
     { label: "5ML", ml: "5ml", price: precio5ml },
     { label: "10ML", ml: "10ml", price: precio10ml },
   ];

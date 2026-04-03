@@ -1166,3 +1166,26 @@ footer {
     flex-wrap: wrap;
   }
 }
+
+/* ===== CATEGORY BACK BUTTON ===== */
+.category-back-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+  background: rgba(20, 20, 20, 0.9);
+  border: 1px solid #333;
+  color: #d4d4d4;
+  padding: 10px 20px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.category-back-btn:hover {
+  border-color: #FFD700;
+  color: #fff;
+}

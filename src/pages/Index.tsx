@@ -1,18 +1,7 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import HeroSection from "@/components/HeroSection";
-import ProductCard from "@/components/ProductCard";
 import './Index.css';
-
-const perfumesMasculinos = [
-  { nombre: "Valentino Born Intense", marca: "VALENTINO", precio2ml: 80, precio3ml: 110, precio5ml: 170, precio10ml: 300, imagen: "https://images.unsplash.com/photo-1594035910387-fea081ac45b2?w=400&h=400&fit=crop" },
-  { nombre: "JPG Le Male", marca: "JEAN PAUL GAULTIER", precio2ml: 70, precio3ml: 95, precio5ml: 150, precio10ml: 270, imagen: "https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=400&h=400&fit=crop" },
-  { nombre: "Versace Eros EDP", marca: "VERSACE", precio2ml: 75, precio3ml: 100, precio5ml: 160, precio10ml: 280, imagen: "https://images.unsplash.com/photo-1541643600914-78b084683601?w=400&h=400&fit=crop" },
-  { nombre: "Versace Dylan Blue", marca: "VERSACE", precio2ml: 65, precio3ml: 90, precio5ml: 140, precio10ml: 250, imagen: "https://images.unsplash.com/photo-1587017539504-67cfbddac569?w=400&h=400&fit=crop" },
-  { nombre: "Azzaro Most Wanted Intense", marca: "AZZARO", precio2ml: 85, precio3ml: 115, precio5ml: 180, precio10ml: 320, imagen: "https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=400&h=400&fit=crop" },
-  { nombre: "Versace Eau Fraîche", marca: "VERSACE", precio2ml: 60, precio3ml: 85, precio5ml: 130, precio10ml: 230, imagen: "https://images.unsplash.com/photo-1594035910387-fea081ac45b2?w=400&h=400&fit=crop" },
-  { nombre: "212 VIP Black", marca: "CAROLINA HERRERA", precio2ml: 75, precio3ml: 100, precio5ml: 155, precio10ml: 275, imagen: "https://images.unsplash.com/photo-1523293182086-7651a899d37f?w=400&h=400&fit=crop" },
-  { nombre: "Nautica Voyage", marca: "NAUTICA", precio2ml: 45, precio3ml: 60, precio5ml: 90, precio10ml: 160, imagen: "https://images.unsplash.com/photo-1541643600914-78b084683601?w=400&h=400&fit=crop" },
-];
 
 const Index = () => {
   const [carrito, setCarrito] = useState([]);
@@ -26,10 +15,6 @@ const Index = () => {
     const precioUnitario = parseInt(select.value);
     const texto = select.options[select.selectedIndex].text;
     setCarrito([...carrito, { nombre, precio: precioUnitario, precioBase: precioUnitario, texto, cantidad: 1 }]);
-  };
-
-  const agregarProductCard = (nombre, precio, texto, cantidad) => {
-    setCarrito([...carrito, { nombre, precio: precio * cantidad, precioBase: precio, texto, cantidad }]);
   };
 
   const eliminarDelCarrito = (index) => {
@@ -77,8 +62,6 @@ const Index = () => {
 
       <nav className="menu-extra">
         <a href="#inicio">Inicio</a>
-        <a href="#tienda">Tienda</a>
-        <a href="#masculino">Masculino</a>
         <a href="#catalogo">Catálogo</a>
         <a href="#nosotros">Nosotros</a>
         <a href="#carrito">Carrito</a>
@@ -89,7 +72,7 @@ const Index = () => {
           <div className="hero-texto">
             <h1>PERFUMES DE DISEÑADOR</h1>
             <p>Encuentra una propuesta diferente para cada ocasión</p>
-            <a href="#masculino" className="btn-hero-premium">EXPLORAR COLECCIÓN</a>
+            <a href="#catalogo" className="btn-hero-premium">EXPLORAR COLECCIÓN</a>
           </div>
         </section>
         <video autoPlay muted loop playsInline className="video-background">
@@ -100,7 +83,7 @@ const Index = () => {
             <span className="video-tag">NUEVA COLECCIÓN</span>
             <h2>Siente el aroma del lujo</h2>
             <p>Inspiración de diseñador a una fracción del precio</p>
-            <a href="#masculino" className="btn-video">COMPRAR AHORA</a>
+            <a href="#catalogo" className="btn-video">COMPRAR AHORA</a>
           </div>
         </div>
       </section>
@@ -118,7 +101,7 @@ const Index = () => {
           <div className="feature-item">
             <span className="feature-icon">◈</span>
             <h3>Decants Precisos</h3>
-            <p>Mediciones exactas en 2ml, 3ml, 5ml y 10ml para que pruebes antes de invertir.</p>
+            <p>Mediciones exactas en 2ml, 5ml y 10ml para que pruebes antes de invertir.</p>
           </div>
           <div className="feature-item">
             <span className="feature-icon">⬡</span>
@@ -128,79 +111,30 @@ const Index = () => {
         </div>
       </section>
 
-      {/* --- MASCULINO DISEÑADOR --- */}
-      <section id="masculino" className="masculino-section">
-        <p className="section-subtitle">Colección para él</p>
-        <h2 className="section-title">Masculino — Diseñador</h2>
-        <div className="section-divider"></div>
-        <div className="masculino-grid">
-          {perfumesMasculinos.map((p, i) => (
-            <ProductCard
-              key={i}
-              nombre={p.nombre}
-              marca={p.marca}
-              precio2ml={p.precio2ml}
-              precio3ml={p.precio3ml}
-              precio5ml={p.precio5ml}
-              precio10ml={p.precio10ml}
-              imagen={p.imagen}
-              onAgregar={agregarProductCard}
-            />
-          ))}
-        </div>
-      </section>
-
+      {/* --- CATÁLOGO CON LINKS A CATEGORÍAS --- */}
       <section id="catalogo" className="catalogo">
         <p className="section-subtitle">Explora nuestras categorías</p>
         <h2 className="titulo-catalogo">Catálogo</h2>
         <div className="fila">
-          {["Masculino Diseñador", "Femenino Diseñador", "Masculino Árabe", "Femenino Árabe"].map((tipo, idx) => (
-            <div className="perfume" key={idx}>
-              <h3>{tipo.split(' ')[0]}</h3>
-              <p>{tipo.split(' ')[1]}</p>
-              <a href="#" className="btn">Ver Todo</a>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section id="tienda" className="tienda">
-        <p className="section-subtitle">Nuestra selección</p>
-        <h2>Tienda</h2>
-        <div className="section-divider"></div>
-        <div className="productos-grid">
-          <div className="producto">
-            <img src="https://via.placeholder.com/280x220/111111/333333?text=Dior+Sauvage" alt="Dior Sauvage" />
-            <h3>Dior Sauvage</h3>
-            <select className="opciones">
-              <option value="200">2ml — $200</option>
-              <option value="400">5ml — $400</option>
-              <option value="700">10ml — $700</option>
-              <option value="1500">30ml — $1,500</option>
-            </select>
-            <button onClick={(e) => agregarAlCarrito("Dior Sauvage", e)}>Agregar al Carrito</button>
+          <div className="perfume">
+            <h3>Masculino</h3>
+            <p>Diseñador</p>
+            <Link to="/masculino-disenador" className="btn">Ver Todo</Link>
           </div>
-          <div className="producto">
-            <img src="https://via.placeholder.com/280x220/111111/333333?text=Lattafa+Asad" alt="Lattafa Asad" />
-            <h3>Lattafa Asad</h3>
-            <select className="opciones">
-              <option value="150">2ml — $150</option>
-              <option value="300">5ml — $300</option>
-              <option value="600">10ml — $600</option>
-              <option value="1200">30ml — $1,200</option>
-            </select>
-            <button onClick={(e) => agregarAlCarrito("Lattafa Asad", e)}>Agregar al Carrito</button>
+          <div className="perfume">
+            <h3>Femenino</h3>
+            <p>Diseñador</p>
+            <Link to="/femenino-disenador" className="btn">Ver Todo</Link>
           </div>
-          <div className="producto">
-            <img src="https://via.placeholder.com/280x220/111111/333333?text=Bleu+de+Chanel" alt="Bleu de Chanel" />
-            <h3>Bleu de Chanel</h3>
-            <select className="opciones">
-              <option value="250">2ml — $250</option>
-              <option value="500">5ml — $500</option>
-              <option value="900">10ml — $900</option>
-              <option value="1800">30ml — $1,800</option>
-            </select>
-            <button onClick={(e) => agregarAlCarrito("Bleu de Chanel", e)}>Agregar al Carrito</button>
+          <div className="perfume">
+            <h3>Masculino</h3>
+            <p>Árabe</p>
+            <Link to="/masculino-arabe" className="btn">Ver Todo</Link>
+          </div>
+          <div className="perfume">
+            <h3>Femenino</h3>
+            <p>Árabe</p>
+            <Link to="/femenino-arabe" className="btn">Ver Todo</Link>
           </div>
         </div>
       </section>
@@ -281,7 +215,6 @@ const Index = () => {
           </div>
           <div className="footer-links">
             <a href="#inicio">Inicio</a>
-            <a href="#tienda">Tienda</a>
             <a href="#catalogo">Catálogo</a>
             <a href="#nosotros">Nosotros</a>
           </div>
