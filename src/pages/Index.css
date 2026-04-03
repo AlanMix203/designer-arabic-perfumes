@@ -1205,3 +1205,240 @@ footer {
   border-color: #FFD700;
   color: #fff;
 }
+
+/* ===== DECANTS SECTION ===== */
+.decants-section {
+  padding: 80px 20px;
+  background: #0a0a0a;
+  text-align: center;
+}
+
+.decants-description {
+  color: #777;
+  font-size: 1rem;
+  max-width: 600px;
+  margin: 0 auto 50px;
+  line-height: 1.8;
+}
+
+.decants-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.decant-card {
+  background: #0e0e0e;
+  border: 1px solid #1a1a1a;
+  padding: 40px 30px;
+  width: 280px;
+  text-align: center;
+  transition: all 0.4s ease;
+}
+
+.decant-card:hover {
+  border-color: #333;
+  transform: translateY(-4px);
+}
+
+.decant-featured {
+  border-color: rgba(255, 215, 0, 0.3);
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.05);
+}
+
+.decant-icon {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5rem;
+  color: #fff;
+  margin-bottom: 16px;
+}
+
+.decant-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.2rem;
+  color: #fff;
+  font-weight: 400;
+  margin-bottom: 12px;
+}
+
+.decant-duration {
+  color: #FFD700;
+  font-size: 0.8rem;
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 0.05em;
+  margin-bottom: 12px;
+}
+
+.decant-detail {
+  color: #666;
+  font-size: 0.85rem;
+  line-height: 1.7;
+  margin-bottom: 16px;
+}
+
+.decant-tag {
+  display: inline-block;
+  padding: 4px 14px;
+  border: 1px solid #333;
+  color: #888;
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* ===== BRANDS SECTION ===== */
+.brands-section {
+  padding: 80px 20px;
+  background: #080808;
+  text-align: center;
+}
+
+.brands-category {
+  margin-bottom: 50px;
+}
+
+.brands-category-title {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.75rem;
+  color: #666;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  margin-bottom: 30px;
+}
+
+.brands-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.brand-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  width: 100px;
+  transition: transform 0.3s;
+}
+
+.brand-card:hover {
+  transform: translateY(-4px);
+}
+
+.brand-logo-circle {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 1px solid #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  color: #fff;
+  letter-spacing: 0.05em;
+  background: #0e0e0e;
+  transition: all 0.3s;
+}
+
+.brand-card:hover .brand-logo-circle {
+  border-color: #FFD700;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.15);
+}
+
+.brand-arab {
+  border-color: #2a2a2a;
+  color: #ccc;
+}
+
+.brand-name {
+  color: #777;
+  font-size: 0.65rem;
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* ===== LOCATION SECTION ===== */
+.location-section {
+  padding: 80px 20px;
+  background: #0c0c0c;
+  text-align: center;
+  border-top: 1px solid #1a1a1a;
+}
+
+.location-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 40px;
+  max-width: 1000px;
+  margin: 0 auto;
+  align-items: start;
+}
+
+.location-info {
+  flex: 1;
+  min-width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.location-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  text-align: left;
+}
+
+.location-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.location-item h4 {
+  font-family: 'Playfair Display', serif;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 400;
+  margin: 0 0 4px;
+}
+
+.location-item p {
+  color: #777;
+  font-size: 0.85rem;
+  margin: 0;
+  line-height: 1.5;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.location-map {
+  flex: 1;
+  min-width: 280px;
+  border: 1px solid #1a1a1a;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .decants-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+  .decant-card {
+    width: 90%;
+  }
+  .brands-grid {
+    gap: 20px;
+  }
+  .location-content {
+    flex-direction: column;
+  }
+}
