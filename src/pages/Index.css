@@ -1481,6 +1481,352 @@ footer {
   }
 }
 
+/* ===== MINI CARD (Horizontal) ===== */
+.mini-grid-horizontal {
+  display: flex;
+  gap: 20px;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 20px 16px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: #333 transparent;
+}
+
+.mini-grid-horizontal::-webkit-scrollbar {
+  height: 5px;
+}
+
+.mini-grid-horizontal::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.mini-grid-horizontal::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 3px;
+}
+
+.mini-card {
+  min-width: 200px;
+  max-width: 200px;
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  background: #0e0e0e;
+  border: 1px solid #1a1a1a;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+
+.mini-card:hover {
+  border-color: #FFD700;
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(255, 215, 0, 0.08);
+}
+
+.mini-card-img {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+  background: #0a0a0a;
+}
+
+.mini-card-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.4s, transform 0.4s;
+}
+
+.mini-card:hover .mini-card-img img {
+  transform: scale(1.05);
+}
+
+.mini-card-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.4s;
+}
+
+.mini-card-info {
+  padding: 14px;
+  text-align: left;
+}
+
+.mini-card-brand {
+  color: #666;
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-family: 'Montserrat', sans-serif;
+  margin: 0 0 4px;
+}
+
+.mini-card-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  color: #fff;
+  font-weight: 500;
+  margin: 0 0 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mini-card-stars {
+  color: #FFD700;
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  margin-bottom: 6px;
+}
+
+.mini-card-price {
+  color: #999;
+  font-size: 0.75rem;
+  font-family: 'Montserrat', sans-serif;
+  margin: 0;
+}
+
+/* ===== DETAIL MODAL ===== */
+.detail-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.85);
+  z-index: 10002;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  overflow-y: auto;
+  padding: 40px 20px;
+  backdrop-filter: blur(8px);
+}
+
+.detail-modal {
+  background: #0c0c0c;
+  border: 1px solid #1a1a1a;
+  max-width: 1100px;
+  width: 100%;
+  position: relative;
+  animation: fadeIn 0.3s ease;
+}
+
+.detail-close {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: none;
+  border: 1px solid #333;
+  color: #999;
+  font-size: 1.2rem;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+  z-index: 10;
+}
+
+.detail-close:hover {
+  border-color: #FFD700;
+  color: #fff;
+}
+
+.detail-main {
+  display: flex;
+  min-height: 500px;
+}
+
+.detail-image {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+  background: #080808;
+  min-height: 500px;
+}
+
+.detail-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.4s;
+}
+
+.detail-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.4s;
+}
+
+.detail-info {
+  flex: 1;
+  padding: 50px 40px;
+  overflow-y: auto;
+}
+
+.detail-brand {
+  color: #888;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-family: 'Montserrat', sans-serif;
+  margin: 0 0 8px;
+}
+
+.detail-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  color: #fff;
+  font-weight: 400;
+  margin: 0 0 8px;
+}
+
+.detail-stars {
+  color: #FFD700;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+}
+
+.detail-stars span {
+  color: #666;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.75rem;
+  margin-left: 6px;
+}
+
+.detail-description {
+  color: #888;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  margin-bottom: 24px;
+}
+
+.detail-momento {
+  display: inline-block;
+  padding: 8px 18px;
+  border: 1px solid #333;
+  color: #ccc;
+  font-size: 0.8rem;
+  font-family: 'Montserrat', sans-serif;
+  margin-bottom: 24px;
+}
+
+.detail-ingredients {
+  margin-bottom: 24px;
+}
+
+.detail-label {
+  color: #fff;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  margin: 0 0 10px;
+}
+
+.detail-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.detail-tag {
+  padding: 6px 14px;
+  border: 1px solid #2a2a2a;
+  color: #999;
+  font-size: 0.7rem;
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 0.05em;
+}
+
+.detail-sizes {
+  margin-bottom: 20px;
+}
+
+.detail-related {
+  padding: 50px 40px;
+  border-top: 1px solid #1a1a1a;
+}
+
+.detail-related-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  color: #fff;
+  font-weight: 400;
+  margin: 0 0 6px;
+  text-align: center;
+}
+
+.detail-related-sub {
+  color: #555;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-family: 'Montserrat', sans-serif;
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.detail-related-grid {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  scrollbar-width: thin;
+  scrollbar-color: #333 transparent;
+}
+
+.detail-related-grid .mini-card {
+  min-width: 180px;
+  max-width: 180px;
+}
+
+@media (max-width: 768px) {
+  .detail-main {
+    flex-direction: column;
+  }
+
+  .detail-image {
+    min-height: 300px;
+  }
+
+  .detail-info {
+    padding: 30px 20px;
+  }
+
+  .detail-name {
+    font-size: 1.5rem;
+  }
+
+  .detail-related {
+    padding: 30px 20px;
+  }
+
+  .mini-card {
+    min-width: 160px;
+    max-width: 160px;
+  }
+
+  .mini-card-img {
+    height: 160px;
+  }
+}
+
 /* ===== SEARCH SECTION ===== */
 .search-section {
   padding: 30px 20px;
