@@ -940,12 +940,35 @@ footer {
 }
 
 .masculino-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  display: flex;
   gap: 30px;
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: #333 transparent;
+}
+
+.masculino-grid::-webkit-scrollbar {
+  height: 6px;
+}
+
+.masculino-grid::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.masculino-grid::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 3px;
+}
+
+.masculino-grid > * {
+  min-width: 320px;
+  flex-shrink: 0;
+  scroll-snap-align: start;
 }
 
 /* ===== PRODUCT CARD (Reference Style) ===== */
