@@ -1,15 +1,16 @@
 import React, { useState, useMemo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import HeroSection from "@/components/HeroSection";
-import ProductCard from "@/components/ProductCard";
+import MiniPerfumeCard from "@/components/MiniPerfumeCard";
+import PerfumeDetail from "@/components/PerfumeDetail";
 import { perfumesMasculinos, perfumesFemeninos, perfumesArabesMasculinos, perfumesArabesFemeninos } from "@/data/categories";
 import './Index.css';
 
 const todosLosPerfumes = [
-  ...perfumesMasculinos.map(p => ({ ...p, categoria: 'Diseñador Masculino' })),
-  ...perfumesFemeninos.map(p => ({ ...p, categoria: 'Diseñador Femenino' })),
-  ...perfumesArabesMasculinos.map(p => ({ ...p, categoria: 'Árabe Masculino' })),
-  ...perfumesArabesFemeninos.map(p => ({ ...p, categoria: 'Árabe Femenino' })),
+  ...perfumesMasculinos,
+  ...perfumesFemeninos,
+  ...perfumesArabesMasculinos,
+  ...perfumesArabesFemeninos,
 ];
 
 const perfumesFamosos = [
@@ -43,6 +44,7 @@ const Index = () => {
   const [carrito, setCarrito] = useState([]);
   const [carritoActivo, setCarritoActivo] = useState(false);
   const [busqueda, setBusqueda] = useState('');
+  const [perfumeSeleccionado, setPerfumeSeleccionado] = useState(null);
 
   const toggleCarrito = () => setCarritoActivo(!carritoActivo);
 
@@ -114,33 +116,16 @@ const Index = () => {
       <section className="search-section">
         <div className="search-container">
           <span className="search-icon">🔍</span>
-          <input
-            type="text"
-            className="search-input"
-            placeholder="Buscar perfume por nombre o marca..."
-            value={busqueda}
-            onChange={(e) => setBusqueda(e.target.value)}
-          />
-          {busqueda && (
-            <button className="search-clear" onClick={() => setBusqueda('')}>✕</button>
-          )}
+          <input type="text" className="search-input" placeholder="Buscar perfume por nombre o marca..."
+            value={busqueda} onChange={(e) => setBusqueda(e.target.value)} />
+          {busqueda && <button className="search-clear" onClick={() => setBusqueda('')}>✕</button>}
         </div>
         {resultadosBusqueda.length > 0 && (
           <div className="search-results">
             <p className="search-results-count">{resultadosBusqueda.length} resultado(s)</p>
-            <div className="masculino-grid">
+            <div className="mini-grid-horizontal">
               {resultadosBusqueda.map((p, i) => (
-                <ProductCard
-                  key={i}
-                  nombre={p.nombre}
-                  marca={p.marca}
-                  precio2ml={p.precio2ml}
-                  precio5ml={p.precio5ml}
-                  precio10ml={p.precio10ml}
-                  imagen={p.imagen}
-                  video={p.video}
-                  onAgregar={agregarProductCard}
-                />
+                <MiniPerfumeCard key={i} perfume={p} onClick={setPerfumeSeleccionado} />
               ))}
             </div>
           </div>
@@ -176,19 +161,9 @@ const Index = () => {
         <p className="section-subtitle">Los favoritos de nuestros clientes</p>
         <h2 className="section-title">Perfumes Más Famosos</h2>
         <div className="section-divider"></div>
-        <div className="masculino-grid">
+        <div className="mini-grid-horizontal">
           {perfumesFamosos.map((p, i) => (
-            <ProductCard
-              key={i}
-              nombre={p.nombre}
-              marca={p.marca}
-              precio2ml={p.precio2ml}
-              precio5ml={p.precio5ml}
-              precio10ml={p.precio10ml}
-              imagen={p.imagen}
-              video={p.video}
-              onAgregar={agregarProductCard}
-            />
+            <MiniPerfumeCard key={i} perfume={p} onClick={setPerfumeSeleccionado} />
           ))}
         </div>
       </section>
@@ -253,60 +228,56 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ===== CATÁLOGO COMPLETO EN LA PÁGINA PRINCIPAL ===== */}
+      {/* ===== CATÁLOGO COMPLETO ===== */}
       <section id="catalogo" className="catalogo-completo">
         <p className="section-subtitle">Nuestra colección completa</p>
         <h2 className="section-title">Catálogo</h2>
         <div className="section-divider"></div>
 
-        {/* Diseñador Masculino */}
         <div className="catalogo-categoria">
           <h3 className="catalogo-categoria-title">
             <span>Diseñador — Masculino</span>
             <Link to="/masculino-disenador" className="catalogo-ver-todo">Ver página completa →</Link>
           </h3>
-          <div className="masculino-grid">
+          <div className="mini-grid-horizontal">
             {perfumesMasculinos.map((p, i) => (
-              <ProductCard key={i} nombre={p.nombre} marca={p.marca} precio2ml={p.precio2ml} precio5ml={p.precio5ml} precio10ml={p.precio10ml} imagen={p.imagen} video={p.video} onAgregar={agregarProductCard} />
+              <MiniPerfumeCard key={i} perfume={p} onClick={setPerfumeSeleccionado} />
             ))}
           </div>
         </div>
 
-        {/* Diseñador Femenino */}
         <div className="catalogo-categoria">
           <h3 className="catalogo-categoria-title">
             <span>Diseñador — Femenino</span>
             <Link to="/femenino-disenador" className="catalogo-ver-todo">Ver página completa →</Link>
           </h3>
-          <div className="masculino-grid">
+          <div className="mini-grid-horizontal">
             {perfumesFemeninos.map((p, i) => (
-              <ProductCard key={i} nombre={p.nombre} marca={p.marca} precio2ml={p.precio2ml} precio5ml={p.precio5ml} precio10ml={p.precio10ml} imagen={p.imagen} video={p.video} onAgregar={agregarProductCard} />
+              <MiniPerfumeCard key={i} perfume={p} onClick={setPerfumeSeleccionado} />
             ))}
           </div>
         </div>
 
-        {/* Árabe Masculino */}
         <div className="catalogo-categoria">
           <h3 className="catalogo-categoria-title">
             <span>Árabe — Masculino</span>
             <Link to="/masculino-arabe" className="catalogo-ver-todo">Ver página completa →</Link>
           </h3>
-          <div className="masculino-grid">
+          <div className="mini-grid-horizontal">
             {perfumesArabesMasculinos.map((p, i) => (
-              <ProductCard key={i} nombre={p.nombre} marca={p.marca} precio2ml={p.precio2ml} precio5ml={p.precio5ml} precio10ml={p.precio10ml} imagen={p.imagen} video={p.video} onAgregar={agregarProductCard} />
+              <MiniPerfumeCard key={i} perfume={p} onClick={setPerfumeSeleccionado} />
             ))}
           </div>
         </div>
 
-        {/* Árabe Femenino */}
         <div className="catalogo-categoria">
           <h3 className="catalogo-categoria-title">
             <span>Árabe — Femenino</span>
             <Link to="/femenino-arabe" className="catalogo-ver-todo">Ver página completa →</Link>
           </h3>
-          <div className="masculino-grid">
+          <div className="mini-grid-horizontal">
             {perfumesArabesFemeninos.map((p, i) => (
-              <ProductCard key={i} nombre={p.nombre} marca={p.marca} precio2ml={p.precio2ml} precio5ml={p.precio5ml} precio10ml={p.precio10ml} imagen={p.imagen} video={p.video} onAgregar={agregarProductCard} />
+              <MiniPerfumeCard key={i} perfume={p} onClick={setPerfumeSeleccionado} />
             ))}
           </div>
         </div>
@@ -317,7 +288,6 @@ const Index = () => {
         <p className="section-subtitle">Las mejores casas de perfumería</p>
         <h2 className="section-title">Marcas que Manejamos</h2>
         <div className="section-divider"></div>
-
         <div className="brands-category">
           <h3 className="brands-category-title">Diseñador</h3>
           <div className="brands-grid">
@@ -329,7 +299,6 @@ const Index = () => {
             ))}
           </div>
         </div>
-
         <div className="brands-category">
           <h3 className="brands-category-title">Árabes</h3>
           <div className="brands-grid">
@@ -350,45 +319,15 @@ const Index = () => {
         <div className="section-divider"></div>
         <div className="location-content">
           <div className="location-info">
-            <div className="location-item">
-              <span className="location-icon">📍</span>
-              <div>
-                <h4>Dirección</h4>
-                <p>San Andrés Tuxtla, Veracruz, México</p>
-              </div>
-            </div>
-            <div className="location-item">
-              <span className="location-icon">🚚</span>
-              <div>
-                <h4>Envíos</h4>
-                <p>Envíos gratis locales · Envíos nacionales a toda la república</p>
-              </div>
-            </div>
-            <div className="location-item">
-              <span className="location-icon">⏰</span>
-              <div>
-                <h4>Horario</h4>
-                <p>Lunes a Sábado: 9:00 AM — 8:00 PM</p>
-              </div>
-            </div>
-            <div className="location-item">
-              <span className="location-icon">💬</span>
-              <div>
-                <h4>Contacto</h4>
-                <p>WhatsApp disponible para consultas y pedidos</p>
-              </div>
-            </div>
+            <div className="location-item"><span className="location-icon">📍</span><div><h4>Dirección</h4><p>San Andrés Tuxtla, Veracruz, México</p></div></div>
+            <div className="location-item"><span className="location-icon">🚚</span><div><h4>Envíos</h4><p>Envíos gratis locales · Envíos nacionales a toda la república</p></div></div>
+            <div className="location-item"><span className="location-icon">⏰</span><div><h4>Horario</h4><p>Lunes a Sábado: 9:00 AM — 8:00 PM</p></div></div>
+            <div className="location-item"><span className="location-icon">💬</span><div><h4>Contacto</h4><p>WhatsApp disponible para consultas y pedidos</p></div></div>
           </div>
           <div className="location-map">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d60432.17!2d-95.22!3d18.45!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85c50d19cb0e87e1%3A0x7b2e0a75b0f03c7d!2sSan%20Andr%C3%A9s%20Tuxtla%2C%20Ver.!5e0!3m2!1ses!2smx!4v1"
-              width="100%"
-              height="300"
-              style={{ border: 0, filter: 'grayscale(100%) invert(92%) contrast(83%)' }}
-              allowFullScreen
-              loading="lazy"
-              title="Ubicación Parfam Avix"
-            ></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d60432.17!2d-95.22!3d18.45!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85c50d19cb0e87e1%3A0x7b2e0a75b0f03c7d!2sSan%20Andr%C3%A9s%20Tuxtla%2C%20Ver.!5e0!3m2!1ses!2smx!4v1"
+              width="100%" height="300" style={{ border: 0, filter: 'grayscale(100%) invert(92%) contrast(83%)' }}
+              allowFullScreen loading="lazy" title="Ubicación Parfam Avix"></iframe>
           </div>
         </div>
       </section>
@@ -436,6 +375,7 @@ const Index = () => {
         </form>
       </section>
 
+      {/* CARRITO */}
       <div id="carrito" className={`carrito ${carritoActivo ? 'activo' : ''}`}>
         <button className="cerrar-carrito" onClick={toggleCarrito}>✕</button>
         <h2>Tu Carrito</h2>
@@ -459,18 +399,23 @@ const Index = () => {
         <h3>Total: $<span>{totalCarrito}</span></h3>
       </div>
 
+      {/* DETAIL MODAL */}
+      {perfumeSeleccionado && (
+        <PerfumeDetail
+          perfume={perfumeSeleccionado}
+          todosLosPerfumes={todosLosPerfumes}
+          onClose={() => setPerfumeSeleccionado(null)}
+          onAgregar={agregarProductCard}
+        />
+      )}
+
       <footer>
         <div className="footer-content">
           <div className="footer-social">
-            <a href="#">𝕏</a>
-            <a href="#">IG</a>
-            <a href="#">FB</a>
-            <a href="#">TT</a>
+            <a href="#">𝕏</a><a href="#">IG</a><a href="#">FB</a><a href="#">TT</a>
           </div>
           <div className="footer-links">
-            <a href="#inicio">Inicio</a>
-            <a href="#catalogo">Catálogo</a>
-            <a href="#nosotros">Nosotros</a>
+            <a href="#inicio">Inicio</a><a href="#catalogo">Catálogo</a><a href="#nosotros">Nosotros</a>
           </div>
           <p>© 2026 Parfam Avix — Fragancias Originales</p>
         </div>
