@@ -180,6 +180,14 @@
   border-bottom: 1px solid #1a1a1a;
 }
 
+.menu-sticky {
+  position: sticky;
+  top: 0;
+  z-index: 9998;
+  backdrop-filter: blur(12px);
+  background: rgba(12, 12, 12, 0.92);
+}
+
 .menu-extra a {
   color: #666;
   text-decoration: none;
@@ -1441,4 +1449,164 @@ footer {
   .location-content {
     flex-direction: column;
   }
+  .search-container {
+    width: 95%;
+  }
+  .catalogo-categoria-title {
+    flex-direction: column;
+    gap: 8px;
+  }
+}
+
+/* ===== SEARCH SECTION ===== */
+.search-section {
+  padding: 30px 20px;
+  background: #0a0a0a;
+  text-align: center;
+}
+
+.search-container {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  background: #111;
+  border: 1px solid #222;
+  padding: 0 16px;
+  transition: border-color 0.3s;
+}
+
+.search-container:focus-within {
+  border-color: #FFD700;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.08);
+}
+
+.search-icon {
+  font-size: 1rem;
+  margin-right: 10px;
+  opacity: 0.5;
+}
+
+.search-input {
+  flex: 1;
+  padding: 14px 0;
+  background: transparent;
+  border: none;
+  color: #ccc;
+  font-size: 0.9rem;
+  font-family: 'Montserrat', sans-serif;
+  outline: none;
+}
+
+.search-input::placeholder {
+  color: #444;
+}
+
+.search-clear {
+  background: none;
+  border: none;
+  color: #555;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 4px 8px;
+  transition: color 0.3s;
+}
+
+.search-clear:hover {
+  color: #fff;
+}
+
+.search-results {
+  max-width: 1400px;
+  margin: 30px auto 0;
+  text-align: left;
+}
+
+.search-results-count {
+  color: #666;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-family: 'Montserrat', sans-serif;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.search-no-results {
+  color: #555;
+  font-size: 0.9rem;
+  margin-top: 20px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* ===== FAMOSOS SECTION ===== */
+.famosos-section {
+  padding: 80px 20px;
+  background: #0a0a0a;
+  text-align: center;
+}
+
+/* ===== CATÁLOGO COMPLETO ===== */
+.catalogo-completo {
+  padding: 80px 20px;
+  background: #080808;
+  text-align: center;
+}
+
+.catalogo-categoria {
+  margin-bottom: 70px;
+}
+
+.catalogo-categoria:last-child {
+  margin-bottom: 0;
+}
+
+.catalogo-categoria-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1400px;
+  margin: 0 auto 30px;
+  padding: 0 20px;
+  border-bottom: 1px solid #1a1a1a;
+  padding-bottom: 16px;
+}
+
+.catalogo-categoria-title span {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  color: #fff;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+}
+
+.catalogo-ver-todo {
+  color: #888;
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  font-family: 'Montserrat', sans-serif;
+  text-decoration: none;
+  transition: color 0.3s;
+  border: 1px solid #333;
+  padding: 8px 16px;
+}
+
+.catalogo-ver-todo:hover {
+  color: #FFD700;
+  border-color: #FFD700;
+}
+
+/* ===== BRAND CLICKABLE ===== */
+.brand-clickable {
+  cursor: pointer;
+}
+
+/* ===== DECANT SPRAYS ===== */
+.decant-sprays {
+  color: #fff;
+  font-size: 1rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  margin-bottom: 6px;
 }
