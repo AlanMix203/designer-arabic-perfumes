@@ -180,6 +180,14 @@
   border-bottom: 1px solid #1a1a1a;
 }
 
+.menu-sticky {
+  position: sticky;
+  top: 0;
+  z-index: 9998;
+  backdrop-filter: blur(12px);
+  background: rgba(12, 12, 12, 0.92);
+}
+
 .menu-extra a {
   color: #666;
   text-decoration: none;
