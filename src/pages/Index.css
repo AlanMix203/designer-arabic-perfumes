@@ -362,6 +362,27 @@
   margin: 0 auto 50px;
 }
 
+/* ===== COMPACT SECTION TITLES ===== */
+.section-title-sm {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  color: #ffffff;
+  letter-spacing: 0.1em;
+  margin-bottom: 8px;
+  font-weight: 400;
+  text-align: center;
+}
+
+.section-subtitle-sm {
+  color: #555;
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  text-align: center;
+  font-family: 'Montserrat', sans-serif;
+  margin-bottom: 4px;
+}
+
 /* ===== CATALOGO ===== */
 .catalogo {
   padding: 80px 20px;
