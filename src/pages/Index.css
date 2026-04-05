@@ -145,29 +145,228 @@
   font-family: 'Montserrat', sans-serif;
 }
 
-/* ===== BOTÓN CARRITO ===== */
-.btn-carrito {
+/* ===== TOP ACTIONS (Search + Cart) ===== */
+.top-actions {
   position: fixed;
-  top: 20px;
+  top: 16px;
   right: 20px;
   z-index: 10000;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.top-search-bar {
+  display: flex;
+  align-items: center;
+  background: rgba(17, 17, 17, 0.95);
+  border: 1px solid #222;
+  padding: 0 12px;
+  border-radius: 6px;
+  transition: border-color 0.3s;
+  backdrop-filter: blur(10px);
+}
+
+.top-search-bar:focus-within {
+  border-color: #FFD700;
+  box-shadow: 0 0 12px rgba(255, 215, 0, 0.08);
+}
+
+.search-icon-sm {
+  font-size: 0.8rem;
+  opacity: 0.5;
+  margin-right: 6px;
+}
+
+.top-search-bar input {
+  background: transparent;
+  border: none;
+  color: #ccc;
+  font-size: 0.75rem;
+  font-family: 'Montserrat', sans-serif;
+  padding: 8px 0;
+  outline: none;
+  width: 180px;
+}
+
+.top-search-bar input::placeholder {
+  color: #444;
+}
+
+.search-clear-sm {
+  background: none;
+  border: none;
+  color: #555;
+  font-size: 0.85rem;
+  cursor: pointer;
+  padding: 2px 4px;
+}
+
+.search-clear-sm:hover {
+  color: #fff;
+}
+
+.btn-carrito {
   background: #fff;
   color: #080808;
   border: none;
-  padding: 10px 20px;
-  border-radius: 0;
+  padding: 8px 16px;
   font-weight: 600;
   cursor: pointer;
-  font-size: 0.75rem;
+  font-size: 0.7rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   font-family: 'Montserrat', sans-serif;
   transition: all 0.3s;
+  white-space: nowrap;
 }
 
 .btn-carrito:hover {
   background: #dfff00;
   color: #080808;
+}
+
+/* Search dropdown */
+.search-dropdown {
+  padding: 20px;
+  background: #0a0a0a;
+  border-bottom: 1px solid #1a1a1a;
+  text-align: center;
+}
+
+/* ===== CATEGORY TABS ===== */
+.category-tabs-section {
+  padding: 16px 20px;
+  background: #0a0a0a;
+  border-bottom: 1px solid #1a1a1a;
+}
+
+.category-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.cat-tab {
+  padding: 10px 24px;
+  background: transparent;
+  border: 1px solid #222;
+  color: #666;
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-family: 'Montserrat', sans-serif;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-weight: 500;
+}
+
+.cat-tab:hover {
+  border-color: #555;
+  color: #ccc;
+}
+
+.cat-tab-active {
+  border-color: #FFD700;
+  color: #fff;
+  background: rgba(255, 215, 0, 0.06);
+}
+
+.cat-content {
+  padding: 30px 20px;
+  background: #080808;
+}
+
+/* ===== NICHO PLACEHOLDER ===== */
+.nicho-soon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+}
+
+.nicho-placeholder {
+  text-align: center;
+  padding: 60px 40px;
+  border: 1px dashed #333;
+  border-radius: 16px;
+  max-width: 500px;
+}
+
+.nicho-icon {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 16px;
+  color: #FFD700;
+}
+
+.nicho-placeholder h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8rem;
+  color: #fff;
+  font-weight: 400;
+  margin: 0 0 12px;
+}
+
+.nicho-placeholder p {
+  color: #666;
+  font-size: 0.85rem;
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 0.05em;
+  margin: 0;
+}
+
+/* ===== PROMO BANNERS ===== */
+.promo-banner {
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #0e0e0e 0%, #141414 50%, #0e0e0e 100%);
+  text-align: center;
+  border-top: 1px solid #1a1a1a;
+  border-bottom: 1px solid #1a1a1a;
+}
+
+.promo-gold {
+  background: linear-gradient(135deg, #0e0e0e 0%, #1a1508 50%, #0e0e0e 100%);
+  border-color: rgba(255, 215, 0, 0.1);
+}
+
+.promo-dark {
+  background: linear-gradient(135deg, #080808 0%, #111 50%, #080808 100%);
+}
+
+.promo-inner {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.promo-tag {
+  display: inline-block;
+  padding: 4px 16px;
+  border: 1px solid #333;
+  color: #FFD700;
+  font-size: 0.6rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  font-family: 'Montserrat', sans-serif;
+  margin-bottom: 14px;
+}
+
+.promo-banner h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem;
+  color: #fff;
+  font-weight: 400;
+  margin: 0 0 8px;
+}
+
+.promo-banner p {
+  color: #666;
+  font-size: 0.8rem;
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 0.05em;
+  margin: 0;
 }
 
 /* ===== MENU ===== */

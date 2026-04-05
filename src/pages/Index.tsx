@@ -46,6 +46,7 @@ const Index = () => {
   const [busqueda, setBusqueda] = useState('');
   const [perfumeSeleccionado, setPerfumeSeleccionado] = useState(null);
   const [marcaFiltro, setMarcaFiltro] = useState(null);
+  const [categoriaActiva, setCategoriaActiva] = useState('disenador');
 
   const toggleCarrito = () => setCarritoActivo(!carritoActivo);
 
@@ -114,43 +115,125 @@ const Index = () => {
         </div>
       </header>
 
-      <button className="btn-carrito" onClick={toggleCarrito}>
-        🛒 Carrito ({carrito.length})
-      </button>
+      {/* TOP RIGHT: Search + Cart */}
+      <div className="top-actions">
+        <div className="top-search-bar">
+          <span className="search-icon-sm">🔍</span>
+          <input type="text" placeholder="Buscar perfume..."
+            value={busqueda} onChange={(e) => setBusqueda(e.target.value)} />
+          {busqueda && <button className="search-clear-sm" onClick={() => setBusqueda('')}>✕</button>}
+        </div>
+        <button className="btn-carrito" onClick={toggleCarrito}>
+          🛒 ({carrito.length})
+        </button>
+      </div>
+
+      {/* Search results dropdown */}
+      {resultadosBusqueda.length > 0 && (
+        <div className="search-dropdown">
+          <p className="search-results-count">{resultadosBusqueda.length} resultado(s)</p>
+          <div className="mini-grid-4">
+            {resultadosBusqueda.map((p, i) => (
+              <MiniPerfumeCard key={i} perfume={p} onClick={setPerfumeSeleccionado} onAgregar={agregarProductCard} />
+            ))}
+          </div>
+        </div>
+      )}
+      {busqueda.trim() && resultadosBusqueda.length === 0 && (
+        <div className="search-dropdown">
+          <p className="search-no-results">No se encontraron perfumes con "{busqueda}"</p>
+        </div>
+      )}
 
       <nav className="menu-extra menu-sticky">
         <a href="#inicio">Inicio</a>
-        <a href="#catalogo">Catálogo</a>
-        <a href="#decants">Decants</a>
         <a href="#marcas">Marcas</a>
+        <a href="#decants">Decants</a>
         <a href="#nosotros">Nosotros</a>
         <a href="#carrito" onClick={(e) => { e.preventDefault(); toggleCarrito(); }}>Carrito</a>
       </nav>
 
-      {/* ===== BUSCADOR ===== */}
-      <section className="search-section">
-        <div className="search-container">
-          <span className="search-icon">🔍</span>
-          <input type="text" className="search-input" placeholder="Buscar perfume por nombre o marca..."
-            value={busqueda} onChange={(e) => setBusqueda(e.target.value)} />
-          {busqueda && <button className="search-clear" onClick={() => setBusqueda('')}>✕</button>}
+      {/* ===== CATEGORY TABS ===== */}
+      <section className="category-tabs-section">
+        <div className="category-tabs">
+          <button className={`cat-tab ${categoriaActiva === 'disenador' ? 'cat-tab-active' : ''}`}
+            onClick={() => setCategoriaActiva('disenador')}>
+            Perfumes de Diseñador
+          </button>
+          <button className={`cat-tab ${categoriaActiva === 'arabes' ? 'cat-tab-active' : ''}`}
+            onClick={() => setCategoriaActiva('arabes')}>
+            Perfumes Árabes
+          </button>
+          <button className={`cat-tab ${categoriaActiva === 'nicho' ? 'cat-tab-active' : ''}`}
+            onClick={() => setCategoriaActiva('nicho')}>
+            Perfumes Nicho
+          </button>
         </div>
-        {resultadosBusqueda.length > 0 && (
-          <div className="search-results">
-            <p className="search-results-count">{resultadosBusqueda.length} resultado(s)</p>
+      </section>
+
+      {/* ===== CATEGORY CONTENT ===== */}
+      {categoriaActiva === 'disenador' && (
+        <section className="cat-content">
+          <div className="catalogo-cat">
+            <h3 className="catalogo-cat-title"><span>Masculino</span></h3>
             <div className="mini-grid-4">
-              {resultadosBusqueda.map((p, i) => (
+              {perfumesMasculinos.map((p, i) => (
                 <MiniPerfumeCard key={i} perfume={p} onClick={setPerfumeSeleccionado} onAgregar={agregarProductCard} />
               ))}
             </div>
           </div>
-        )}
-        {busqueda.trim() && resultadosBusqueda.length === 0 && (
-          <p className="search-no-results">No se encontraron perfumes con "{busqueda}"</p>
-        )}
+          <div className="catalogo-cat">
+            <h3 className="catalogo-cat-title"><span>Femenino</span></h3>
+            <div className="mini-grid-4">
+              {perfumesFemeninos.map((p, i) => (
+                <MiniPerfumeCard key={i} perfume={p} onClick={setPerfumeSeleccionado} onAgregar={agregarProductCard} />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {categoriaActiva === 'arabes' && (
+        <section className="cat-content">
+          <div className="catalogo-cat">
+            <h3 className="catalogo-cat-title"><span>Masculino</span></h3>
+            <div className="mini-grid-4">
+              {perfumesArabesMasculinos.map((p, i) => (
+                <MiniPerfumeCard key={i} perfume={p} onClick={setPerfumeSeleccionado} onAgregar={agregarProductCard} />
+              ))}
+            </div>
+          </div>
+          <div className="catalogo-cat">
+            <h3 className="catalogo-cat-title"><span>Femenino</span></h3>
+            <div className="mini-grid-4">
+              {perfumesArabesFemeninos.map((p, i) => (
+                <MiniPerfumeCard key={i} perfume={p} onClick={setPerfumeSeleccionado} onAgregar={agregarProductCard} />
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {categoriaActiva === 'nicho' && (
+        <section className="cat-content nicho-soon">
+          <div className="nicho-placeholder">
+            <span className="nicho-icon">✦</span>
+            <h3>Próximamente</h3>
+            <p>Estamos seleccionando las mejores fragancias de nicho para ti</p>
+          </div>
+        </section>
+      )}
+
+      {/* ===== PROMO BANNER 1 ===== */}
+      <section className="promo-banner">
+        <div className="promo-inner">
+          <span className="promo-tag">ENVÍO GRATIS</span>
+          <h3>Envíos gratis en San Andrés Tuxtla</h3>
+          <p>Envíos nacionales disponibles · Entrega 1-2 días hábiles</p>
+        </div>
       </section>
 
-      {/* ===== MARCAS (después del buscador) ===== */}
+      {/* ===== MARCAS ===== */}
       <section id="marcas" className="brands-section-compact">
         <h2 className="section-title-sm">Marcas que Manejamos</h2>
         <div className="brands-row">
@@ -193,27 +276,6 @@ const Index = () => {
         </section>
       )}
 
-      <section className="video-hero">
-        <section className="hero-premium fade-in">
-          <div className="hero-texto">
-            <h1>PERFUMES DE DISEÑADOR</h1>
-            <p>Encuentra una propuesta diferente para cada ocasión</p>
-            <a href="#catalogo" className="btn-hero-premium">EXPLORAR COLECCIÓN</a>
-          </div>
-        </section>
-        <video autoPlay muted loop playsInline className="video-background">
-          <source src="TU_VIDEO.mp4" type="video/mp4" />
-        </video>
-        <div className="video-overlay">
-          <div className="video-content">
-            <span className="video-tag">NUEVA COLECCIÓN</span>
-            <h2>Siente el aroma del lujo</h2>
-            <p>Inspiración de diseñador a una fracción del precio</p>
-            <a href="#catalogo" className="btn-video">COMPRAR AHORA</a>
-          </div>
-        </div>
-      </section>
-
       {/* ===== PERFUMES MÁS FAMOSOS ===== */}
       <section className="famosos-section-compact">
         <p className="section-subtitle-sm">Los favoritos de nuestros clientes</p>
@@ -222,6 +284,15 @@ const Index = () => {
           {perfumesFamosos.map((p, i) => (
             <MiniPerfumeCard key={i} perfume={p} onClick={setPerfumeSeleccionado} onAgregar={agregarProductCard} />
           ))}
+        </div>
+      </section>
+
+      {/* ===== PROMO BANNER 2 ===== */}
+      <section className="promo-banner promo-gold">
+        <div className="promo-inner">
+          <span className="promo-tag">100% ORIGINALES</span>
+          <h3>Perfumes auténticos de las mejores marcas</h3>
+          <p>Cada fragancia es cuidadosamente seleccionada y garantizada</p>
         </div>
       </section>
 
@@ -267,44 +338,12 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ===== CATÁLOGO COMPLETO ===== */}
-      <section id="catalogo" className="catalogo-compact">
-        <h2 className="section-title-sm">Catálogo</h2>
-
-        <div className="catalogo-cat">
-          <h3 className="catalogo-cat-title"><span>Diseñador — Masculino</span></h3>
-          <div className="mini-grid-4">
-            {perfumesMasculinos.map((p, i) => (
-              <MiniPerfumeCard key={i} perfume={p} onClick={setPerfumeSeleccionado} onAgregar={agregarProductCard} />
-            ))}
-          </div>
-        </div>
-
-        <div className="catalogo-cat">
-          <h3 className="catalogo-cat-title"><span>Diseñador — Femenino</span></h3>
-          <div className="mini-grid-4">
-            {perfumesFemeninos.map((p, i) => (
-              <MiniPerfumeCard key={i} perfume={p} onClick={setPerfumeSeleccionado} onAgregar={agregarProductCard} />
-            ))}
-          </div>
-        </div>
-
-        <div className="catalogo-cat">
-          <h3 className="catalogo-cat-title"><span>Árabe — Masculino</span></h3>
-          <div className="mini-grid-4">
-            {perfumesArabesMasculinos.map((p, i) => (
-              <MiniPerfumeCard key={i} perfume={p} onClick={setPerfumeSeleccionado} onAgregar={agregarProductCard} />
-            ))}
-          </div>
-        </div>
-
-        <div className="catalogo-cat">
-          <h3 className="catalogo-cat-title"><span>Árabe — Femenino</span></h3>
-          <div className="mini-grid-4">
-            {perfumesArabesFemeninos.map((p, i) => (
-              <MiniPerfumeCard key={i} perfume={p} onClick={setPerfumeSeleccionado} onAgregar={agregarProductCard} />
-            ))}
-          </div>
+      {/* ===== PROMO BANNER 3 ===== */}
+      <section className="promo-banner promo-dark">
+        <div className="promo-inner">
+          <span className="promo-tag">¿NO SABES QUÉ ELEGIR?</span>
+          <h3>Escríbenos por WhatsApp y te asesoramos</h3>
+          <p>Te ayudamos a encontrar la fragancia perfecta para ti</p>
         </div>
       </section>
 
@@ -403,7 +442,7 @@ const Index = () => {
             <a href="#">𝕏</a><a href="#">IG</a><a href="#">FB</a><a href="#">TT</a>
           </div>
           <div className="footer-links">
-            <a href="#inicio">Inicio</a><a href="#catalogo">Catálogo</a><a href="#nosotros">Nosotros</a>
+            <a href="#inicio">Inicio</a><a href="#marcas">Marcas</a><a href="#nosotros">Nosotros</a>
           </div>
           <p>© 2026 Parfam Avix — Fragancias Originales</p>
         </div>

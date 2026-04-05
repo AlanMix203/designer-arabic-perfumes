@@ -7,10 +7,10 @@ const HeroSection = () => {
         <img src={avixLogo} alt="AVIX Logo" className="hero-logo-img" />
       </div>
       <div className="hero-logo-text">
-        <span className="hero-brand-name">AVIX</span>
+        <span className="hero-brand-name">PARFAM AVIX</span>
       </div>
       <div className="hero-tagline">
-        <span>Fragancias de Lujo</span>
+        <span>Decants</span>
       </div>
       <div className="hero-line"></div>
     </div>
