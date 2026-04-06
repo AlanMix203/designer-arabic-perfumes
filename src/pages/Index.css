@@ -52,7 +52,7 @@
 }
 
 .hero-logo-text {
-  margin-top: 4px;
+  margin-top: 0;
 }
 
 .hero-brand-name {
@@ -75,7 +75,7 @@
   width: 40px;
   height: 1px;
   background: #333;
-  margin-top: 8px;
+  margin-top: 2px;
 }
 
 /* ===== TOP BAR ===== */
