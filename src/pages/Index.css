@@ -23,7 +23,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 2px;
 }
 
 .hero-logo-wrapper {
@@ -109,8 +109,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 16px;
-  padding: 50px 20px 40px;
+  gap: 6px;
+  padding: 30px 20px 16px;
   background: linear-gradient(180deg, #0c0c0c 0%, #080808 100%);
   border-bottom: 1px solid #1a1a1a;
 }
@@ -148,7 +148,7 @@
 /* ===== TOP ACTIONS (Search + Cart) ===== */
 .top-actions {
   position: fixed;
-  top: 16px;
+  top: 46px;
   right: 20px;
   z-index: 10000;
   display: flex;
