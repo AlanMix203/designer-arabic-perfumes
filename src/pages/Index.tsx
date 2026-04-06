@@ -50,7 +50,7 @@ const Index = () => {
   const [busqueda, setBusqueda] = useState('');
   const [perfumeSeleccionado, setPerfumeSeleccionado] = useState(null);
   const [marcaFiltro, setMarcaFiltro] = useState(null);
-  // removed categoriaActiva
+  const [marcaLogo, setMarcaLogo] = useState(null);
   const [marcasModal, setMarcasModal] = useState(false);
   const [marcaDetalleModal, setMarcaDetalleModal] = useState(false);
   const [aromasModal, setAromasModal] = useState(false);
