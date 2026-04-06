@@ -50,7 +50,7 @@ const Index = () => {
   const [busqueda, setBusqueda] = useState('');
   const [perfumeSeleccionado, setPerfumeSeleccionado] = useState(null);
   const [marcaFiltro, setMarcaFiltro] = useState(null);
-  const [categoriaActiva, setCategoriaActiva] = useState('disenador');
+  // removed categoriaActiva
   const [marcasModal, setMarcasModal] = useState(false);
   const [marcaDetalleModal, setMarcaDetalleModal] = useState(false);
   const [aromasModal, setAromasModal] = useState(false);
@@ -183,15 +183,6 @@ const Index = () => {
         <img src={bannerImg} alt="Colección de perfumes Parfam Avix" />
       </div>
 
-      {/* CATEGORY TABS */}
-      <section className="category-tabs-section">
-        <div className="category-tabs">
-          <button className={`cat-tab ${categoriaActiva === 'disenador' ? 'cat-tab-active' : ''}`} onClick={() => setCategoriaActiva('disenador')}>Diseñador</button>
-          <button className={`cat-tab ${categoriaActiva === 'arabes' ? 'cat-tab-active' : ''}`} onClick={() => setCategoriaActiva('arabes')}>Árabes</button>
-          <button className={`cat-tab ${categoriaActiva === 'nicho' ? 'cat-tab-active' : ''}`} onClick={() => setCategoriaActiva('nicho')}>Nicho</button>
-        </div>
-      </section>
-
       {/* AROMA FILTER RESULTS */}
       {aromaFiltro && (
         <section className="aroma-filter-section">
@@ -208,58 +199,47 @@ const Index = () => {
         </section>
       )}
 
-      {/* ===== CATEGORY CONTENT ===== */}
-      {categoriaActiva === 'disenador' && (
-        <section className="cat-content">
-          <div className="catalogo-cat">
-            <h3 className="catalogo-cat-title"><span>Masculino</span></h3>
-            <div className="mini-grid-4">
-              {perfumesMasculinos.map((p, i) => (
-                <MiniPerfumeCard key={i} perfume={p} onClick={setPerfumeSeleccionado} onAgregar={agregarProductCard} />
-              ))}
-            </div>
+      {/* ===== DISEÑADOR ===== */}
+      <section className="cat-content">
+        <h2 className="section-title-sm" style={{ marginBottom: 16 }}>Diseñador</h2>
+        <div className="catalogo-cat">
+          <h3 className="catalogo-cat-title"><span>Masculino</span></h3>
+          <div className="mini-grid-4">
+            {perfumesMasculinos.map((p, i) => (
+              <MiniPerfumeCard key={i} perfume={p} onClick={setPerfumeSeleccionado} onAgregar={agregarProductCard} />
+            ))}
           </div>
-          <div className="catalogo-cat">
-            <h3 className="catalogo-cat-title"><span>Femenino</span></h3>
-            <div className="mini-grid-4">
-              {perfumesFemeninos.map((p, i) => (
-                <MiniPerfumeCard key={i} perfume={p} onClick={setPerfumeSeleccionado} onAgregar={agregarProductCard} />
-              ))}
-            </div>
+        </div>
+        <div className="catalogo-cat">
+          <h3 className="catalogo-cat-title"><span>Femenino</span></h3>
+          <div className="mini-grid-4">
+            {perfumesFemeninos.map((p, i) => (
+              <MiniPerfumeCard key={i} perfume={p} onClick={setPerfumeSeleccionado} onAgregar={agregarProductCard} />
+            ))}
           </div>
-        </section>
-      )}
+        </div>
+      </section>
 
-      {categoriaActiva === 'arabes' && (
-        <section className="cat-content">
-          <div className="catalogo-cat">
-            <h3 className="catalogo-cat-title"><span>Masculino</span></h3>
-            <div className="mini-grid-4">
-              {perfumesArabesMasculinos.map((p, i) => (
-                <MiniPerfumeCard key={i} perfume={p} onClick={setPerfumeSeleccionado} onAgregar={agregarProductCard} />
-              ))}
-            </div>
+      {/* ===== ÁRABES ===== */}
+      <section className="cat-content">
+        <h2 className="section-title-sm" style={{ marginBottom: 16 }}>Árabes</h2>
+        <div className="catalogo-cat">
+          <h3 className="catalogo-cat-title"><span>Masculino</span></h3>
+          <div className="mini-grid-4">
+            {perfumesArabesMasculinos.map((p, i) => (
+              <MiniPerfumeCard key={i} perfume={p} onClick={setPerfumeSeleccionado} onAgregar={agregarProductCard} />
+            ))}
           </div>
-          <div className="catalogo-cat">
-            <h3 className="catalogo-cat-title"><span>Femenino</span></h3>
-            <div className="mini-grid-4">
-              {perfumesArabesFemeninos.map((p, i) => (
-                <MiniPerfumeCard key={i} perfume={p} onClick={setPerfumeSeleccionado} onAgregar={agregarProductCard} />
-              ))}
-            </div>
+        </div>
+        <div className="catalogo-cat">
+          <h3 className="catalogo-cat-title"><span>Femenino</span></h3>
+          <div className="mini-grid-4">
+            {perfumesArabesFemeninos.map((p, i) => (
+              <MiniPerfumeCard key={i} perfume={p} onClick={setPerfumeSeleccionado} onAgregar={agregarProductCard} />
+            ))}
           </div>
-        </section>
-      )}
-
-      {categoriaActiva === 'nicho' && (
-        <section className="cat-content nicho-soon">
-          <div className="nicho-placeholder">
-            <span className="nicho-icon">✦</span>
-            <h3>Próximamente</h3>
-            <p>Estamos seleccionando las mejores fragancias de nicho para ti</p>
-          </div>
-        </section>
-      )}
+        </div>
+      </section>
 
       {/* ===== PROMO BANNER 1 ===== */}
       <section className="promo-banner">
