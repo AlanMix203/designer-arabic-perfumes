@@ -3039,18 +3039,91 @@ footer {
 /* ===== BANNER IMAGE ===== */
 .banner-image-section {
   width: 100%;
-  max-height: 280px;
+  max-height: 350px;
   overflow: hidden;
   border-bottom: 1px solid #1a1a1a;
 }
 
 .banner-image-section img {
   width: 100%;
-  height: 280px;
+  height: 350px;
   object-fit: cover;
   object-position: center;
   display: block;
   filter: brightness(0.8);
+}
+
+/* ===== MARCA LOGO HEADER ===== */
+.marca-logo-header {
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.marca-logo-img {
+  max-height: 60px;
+  max-width: 250px;
+  object-fit: contain;
+  filter: invert(1) brightness(2);
+  opacity: 0.9;
+}
+
+/* ===== DECANTS INFO IMAGES ===== */
+.decants-info-images {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin: 20px 0 24px;
+}
+
+.decant-img-card {
+  text-align: center;
+  flex: 1;
+  max-width: 200px;
+}
+
+.decant-img-card img {
+  width: 100%;
+  height: 160px;
+  object-fit: contain;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid #222;
+}
+
+.decant-img-card span {
+  display: block;
+  margin-top: 8px;
+  color: #888;
+  font-size: 0.65rem;
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ===== ENVIO COTIZAR ===== */
+.envio-cotizar-block {
+  text-align: center;
+}
+
+.envio-cotizar-btn {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 12px 28px;
+  background: #4D148C;
+  color: #FF6600;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  border-radius: 8px;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.envio-cotizar-btn:hover {
+  background: #5D249C;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(77, 20, 140, 0.4);
 }
 
 /* ===== AROMAS ===== */
@@ -3290,6 +3363,10 @@ footer {
     grid-template-columns: repeat(2, 1fr);
   }
   .banner-image-section img {
-    height: 180px;
+    height: 220px;
+  }
+  .decants-info-images {
+    flex-direction: column;
+    align-items: center;
   }
 }

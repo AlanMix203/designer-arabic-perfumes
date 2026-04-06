@@ -1,3 +1,6 @@
+import decantAtomizer from "@/assets/decant-atomizer.png";
+import decantProcess from "@/assets/decant-process.png";
+
 const DecantsInfo = ({ onClose }) => {
   return (
     <div className="modal-bg open" onClick={(e) => e.target === e.currentTarget && onClose()}>
@@ -11,6 +14,17 @@ const DecantsInfo = ({ onClose }) => {
           <div className="decants-info-block">
             <h3>📖 Definición</h3>
             <p>Un decant es una porción del perfume original trasvasada cuidadosamente a un atomizador portátil de vidrio o aluminio. No es una imitación ni réplica — es el mismo perfume original en una presentación más accesible.</p>
+          </div>
+
+          <div className="decants-info-images">
+            <div className="decant-img-card">
+              <img src={decantAtomizer} alt="Atomizador de decant" loading="lazy" width={512} height={512} />
+              <span>Atomizador portátil</span>
+            </div>
+            <div className="decant-img-card">
+              <img src={decantProcess} alt="Proceso de decant" loading="lazy" width={512} height={512} />
+              <span>Proceso de extracción</span>
+            </div>
           </div>
 
           <div className="decants-info-block">
