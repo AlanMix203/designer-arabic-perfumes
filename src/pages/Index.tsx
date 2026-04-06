@@ -108,8 +108,9 @@ const Index = () => {
     );
   }, [aromaFiltro]);
 
-  const handleMarcaClick = (nombre) => {
-    setMarcaFiltro(nombre);
+  const handleMarcaClick = (marca) => {
+    setMarcaFiltro(marca.nombre);
+    setMarcaLogo(marca.logo || null);
     setMarcasModal(false);
     setMarcaDetalleModal(true);
   };
