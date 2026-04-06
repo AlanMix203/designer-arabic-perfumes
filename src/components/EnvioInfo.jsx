@@ -1,3 +1,5 @@
+import fedexTruck from "@/assets/fedex-truck.png";
+
 const EnvioInfo = ({ onClose }) => {
   return (
     <div className="modal-bg open" onClick={(e) => e.target === e.currentTarget && onClose()}>
@@ -9,6 +11,7 @@ const EnvioInfo = ({ onClose }) => {
 
         <div className="decants-info-content">
           <div className="envio-highlight">
+            <img src={fedexTruck} alt="FedEx Express" loading="lazy" width={512} height={512} style={{ width: 120, height: 'auto', margin: '0 auto 12px', display: 'block' }} />
             <span className="envio-fedex">FedEx Express</span>
             <p>Todos nuestros envíos nacionales se realizan a través de <strong>FedEx</strong>, garantizando seguridad, rapidez y rastreo en tiempo real.</p>
           </div>
@@ -29,6 +32,19 @@ const EnvioInfo = ({ onClose }) => {
               <li>Protección contra derrames con sello hermético</li>
               <li>Cada decant va envuelto individualmente</li>
             </ul>
+          </div>
+
+          <div className="decants-info-block envio-cotizar-block">
+            <h3>💰 Cotiza tu Envío</h3>
+            <p>Consulta el costo de envío a tu código postal directamente en SkyDropx:</p>
+            <a
+              href="https://www.skydrops.mx/cotizar"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="envio-cotizar-btn"
+            >
+              Cotizar envío en SkyDropx →
+            </a>
           </div>
 
           <div className="decants-info-block">
