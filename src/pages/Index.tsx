@@ -446,7 +446,7 @@ const Index = () => {
             <p className="modal-section-label">Diseñador</p>
             <div className="brands-grid" style={{ marginBottom: 28 }}>
               {marcasDisenador.map((m, i) => (
-                <div key={i} className="brand-card brand-clickable" onClick={() => handleMarcaClick(m.nombre)}>
+                <div key={i} className="brand-card brand-clickable" onClick={() => handleMarcaClick(m)}>
                   <div className="brand-logo-circle">{m.iniciales}</div>
                   <span className="brand-name">{m.nombre}</span>
                 </div>
@@ -456,7 +456,7 @@ const Index = () => {
             <p className="modal-section-label">Árabes</p>
             <div className="brands-grid">
               {marcasArabes.map((m, i) => (
-                <div key={i} className="brand-card brand-clickable" onClick={() => handleMarcaClick(m.nombre)}>
+                <div key={i} className="brand-card brand-clickable" onClick={() => handleMarcaClick(m)}>
                   <div className="brand-logo-circle brand-arab">{m.iniciales}</div>
                   <span className="brand-name">{m.nombre}</span>
                 </div>
