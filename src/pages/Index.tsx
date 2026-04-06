@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo , useEffect} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import HeroSection from "@/components/HeroSection";
 import MiniPerfumeCard from "@/components/MiniPerfumeCard";
@@ -47,6 +47,14 @@ const Index = () => {
   const [perfumeSeleccionado, setPerfumeSeleccionado] = useState(null);
   const [marcaFiltro, setMarcaFiltro] = useState(null);
   const [categoriaActiva, setCategoriaActiva] = useState('disenador');
+  const [marcasModal, setMarcasModal] = useState(false);
+
+  useEffect(() => {
+  const fn = (e) => { if (e.key === 'Escape') setMarcasModal(false); };
+  window.addEventListener('keydown', fn);
+  return () => window.removeEventListener('keydown', fn);
+ }, []);
+  const [marcaDetalleModal, setMarcaDetalleModal] = useState(false);
 
   const toggleCarrito = () => setCarritoActivo(!carritoActivo);
 
@@ -86,10 +94,9 @@ const Index = () => {
   }, [marcaFiltro]);
 
   const handleMarcaClick = (nombre) => {
-    setMarcaFiltro(nombre);
-    setTimeout(() => {
-      document.getElementById('marca-filtrada')?.scrollIntoView({ behavior: 'smooth' });
-    }, 100);
+  setMarcaFiltro(nombre);
+  setMarcasModal(false);
+  setMarcaDetalleModal(true);
   };
 
   return (
@@ -110,8 +117,6 @@ const Index = () => {
       <header className="encabezado">
         <HeroSection />
         <div className="texto-header">
-          <h1>PARFAM AVIX</h1>
-          <p>Fragancias exclusivas de diseñador</p>
         </div>
       </header>
 
@@ -147,29 +152,11 @@ const Index = () => {
 
       <nav className="menu-extra menu-sticky">
         <a href="#inicio">Inicio</a>
-        <a href="#marcas">Marcas</a>
+        <a href="#marcas" onClick={(e) => { e.preventDefault(); setMarcasModal(true); }}>Marcas</a>
         <a href="#decants">Decants</a>
         <a href="#nosotros">Nosotros</a>
         <a href="#carrito" onClick={(e) => { e.preventDefault(); toggleCarrito(); }}>Carrito</a>
       </nav>
-
-      {/* ===== CATEGORY TABS ===== */}
-      <section className="category-tabs-section">
-        <div className="category-tabs">
-          <button className={`cat-tab ${categoriaActiva === 'disenador' ? 'cat-tab-active' : ''}`}
-            onClick={() => setCategoriaActiva('disenador')}>
-            Perfumes de Diseñador
-          </button>
-          <button className={`cat-tab ${categoriaActiva === 'arabes' ? 'cat-tab-active' : ''}`}
-            onClick={() => setCategoriaActiva('arabes')}>
-            Perfumes Árabes
-          </button>
-          <button className={`cat-tab ${categoriaActiva === 'nicho' ? 'cat-tab-active' : ''}`}
-            onClick={() => setCategoriaActiva('nicho')}>
-            Perfumes Nicho
-          </button>
-        </div>
-      </section>
 
       {/* ===== CATEGORY CONTENT ===== */}
       {categoriaActiva === 'disenador' && (
@@ -233,49 +220,29 @@ const Index = () => {
         </div>
       </section>
 
-      {/* ===== MARCAS ===== */}
-      <section id="marcas" className="brands-section-compact">
-        <h2 className="section-title-sm">Marcas que Manejamos</h2>
-        <div className="brands-row">
-          <div className="brands-sub">
-            <span className="brands-sub-label">Diseñador</span>
-            <div className="brands-inline">
-              {marcasDisenador.map((m, i) => (
-                <div key={i} className="brand-chip" onClick={() => handleMarcaClick(m.nombre)}>
-                  <div className="brand-chip-circle">{m.iniciales}</div>
-                  <span>{m.nombre}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="brands-sub">
-            <span className="brands-sub-label">Árabes</span>
-            <div className="brands-inline">
-              {marcasArabes.map((m, i) => (
-                <div key={i} className="brand-chip brand-chip-arab" onClick={() => handleMarcaClick(m.nombre)}>
-                  <div className="brand-chip-circle">{m.iniciales}</div>
-                  <span>{m.nombre}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* ===== MARCA FILTRADA ===== */}
-      {marcaFiltro && (
-        <section id="marca-filtrada" className="marca-filtrada-section">
-          <button className="marca-filtrada-close" onClick={() => setMarcaFiltro(null)}>✕ Cerrar</button>
-          <h2 className="marca-filtrada-title">{marcaFiltro}</h2>
-          <p className="marca-filtrada-sub">{perfumesDeMarca.length} perfume(s) disponibles</p>
-          <div className="mini-grid-4">
-            {perfumesDeMarca.map((p, i) => (
-              <MiniPerfumeCard key={i} perfume={p} onClick={setPerfumeSeleccionado} onAgregar={agregarProductCard} />
-            ))}
-          </div>
-        </section>
-      )}
-
+     {marcaDetalleModal && marcaFiltro && (
+  <div className="modal-bg open" onClick={(e) => e.target === e.currentTarget && setMarcaDetalleModal(false)}>
+    <div className="modal-box" style={{ maxWidth: 1000, maxHeight: '85vh', overflowY: 'auto' }}>
+      <button className="modal-close" onClick={() => setMarcaDetalleModal(false)}>✕</button>
+      <p className="modal-top-tag">Colección</p>
+      <h2 className="section-title-sm" style={{ marginBottom: 4 }}>{marcaFiltro}</h2>
+      <p className="modal-section-label" style={{ marginBottom: 24 }}>{perfumesDeMarca.length} perfume(s) disponibles</p>
+      <div className="modal-divider"></div>
+      <div className="mini-grid-4" style={{ padding: '0 0 20px' }}>
+        {perfumesDeMarca.map((p, i) => (
+          <MiniPerfumeCard
+            key={i}
+            perfume={p}
+            onClick={(p) => { setMarcaDetalleModal(false); setPerfumeSeleccionado(p); }}
+            onAgregar={agregarProductCard}
+          />
+        ))}
+      </div>
+    </div>
+  </div>
+)}
+       
       {/* ===== PERFUMES MÁS FAMOSOS ===== */}
       <section className="famosos-section-compact">
         <p className="section-subtitle-sm">Los favoritos de nuestros clientes</p>
@@ -435,6 +402,39 @@ const Index = () => {
           onAgregar={agregarProductCard}
         />
       )}
+
+      {/* MODAL MARCAS */}
+      {marcasModal && (
+        <div className="modal-bg open" onClick={(e) => e.target === e.currentTarget && setMarcasModal(false)}>
+          <div className="modal-box">
+            <button className="modal-close" onClick={() => setMarcasModal(false)}>✕</button>
+            <p className="modal-top-tag">Las mejores casas de perfumería</p>
+            <h2 className="section-title-sm" style={{ marginBottom: 6 }}>Marcas que Manejamos</h2>
+            <div className="modal-divider"></div>
+
+            <p className="modal-section-label">Diseñador</p>
+            <div className="brands-grid" style={{ marginBottom: 28 }}>
+              {marcasDisenador.map((m, i) => (
+                <div key={i} className="brand-card brand-clickable" onClick={() => { setMarcasModal(false); handleMarcaClick(m.nombre); }}>
+                  <div className="brand-logo-circle">{m.iniciales}</div>
+                  <span className="brand-name">{m.nombre}</span>
+                </div>
+              ))}
+            </div>
+
+            <p className="modal-section-label">Árabes</p>
+            <div className="brands-grid">
+              {marcasArabes.map((m, i) => (
+                <div key={i} className="brand-card brand-clickable" onClick={() => { setMarcasModal(false); handleMarcaClick(m.nombre); }}>
+                  <div className="brand-logo-circle brand-arab">{m.iniciales}</div>
+                  <span className="brand-name">{m.nombre}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
 
       <footer>
         <div className="footer-content">

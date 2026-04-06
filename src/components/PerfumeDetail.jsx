@@ -130,27 +130,79 @@ const PerfumeDetail = ({ perfume, todosLosPerfumes, onClose, onAgregar }) => {
           </div>
         </div>
 
-        {/* Related perfumes */}
-        {relacionados.length > 0 && (
-          <div className="detail-related">
-            <h3 className="detail-related-title">Perfumes Relacionados</h3>
-            <p className="detail-related-sub">Basado en ingredientes similares</p>
-            <div className="detail-related-grid">
-              {relacionados.map((p, i) => (
-                <MiniPerfumeCard key={i} perfume={p} onClick={() => {}} />
+        {/* INFO DEL PERFUME */}
+        <div className="detail-related">
+          <h3 className="detail-related-title">Sobre esta Fragancia</h3>
+          <p className="detail-related-sub">Perfil olfativo completo</p>
+
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: 24, marginTop: 16 }}>
+
+            {/* Acordes */}
+            <div style={{ background: '#111', border: '1px solid #1a1a1a', borderRadius: 12, padding: '24px' }}>
+              <p style={{ color: '#555', fontSize: '0.6rem', letterSpacing: '0.2em', textTransform: 'uppercase', fontFamily: 'Montserrat, sans-serif', marginBottom: 16 }}>Acordes Principales</p>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                {(perfume.acordes || []).map((acorde, i) => (
+                  <div key={i}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 4 }}>
+                      <span style={{ color: '#ccc', fontSize: '0.75rem', fontFamily: 'Montserrat, sans-serif' }}>{acorde.nombre}</span>
+                    </div>
+                    <div style={{ background: '#1a1a1a', borderRadius: 4, height: 10, overflow: 'hidden' }}>
+                      <div style={{ width: `${acorde.porcentaje}%`, height: '100%', background: acorde.color, borderRadius: 4, transition: 'width 0.6s ease' }} />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Notas */}
+            <div style={{ background: '#111', border: '1px solid #1a1a1a', borderRadius: 12, padding: '24px' }}>
+              <p style={{ color: '#555', fontSize: '0.6rem', letterSpacing: '0.2em', textTransform: 'uppercase', fontFamily: 'Montserrat, sans-serif', marginBottom: 16 }}>Pirámide Olfativa</p>
+
+              <div style={{ marginBottom: 16 }}>
+                <p style={{ color: '#FFD700', fontSize: '0.6rem', letterSpacing: '0.15em', textTransform: 'uppercase', fontFamily: 'Montserrat, sans-serif', marginBottom: 8 }}>▲ Salida</p>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                  {(perfume.notasSalida || []).map((n, i) => (
+                    <span key={i} style={{ padding: '4px 10px', border: '1px solid #2a2a2a', color: '#ccc', fontSize: '0.7rem', fontFamily: 'Montserrat, sans-serif', borderRadius: 6 }}>{n}</span>
+                  ))}
+                </div>
+              </div>
+
+              <div style={{ marginBottom: 16 }}>
+                <p style={{ color: '#FFD700', fontSize: '0.6rem', letterSpacing: '0.15em', textTransform: 'uppercase', fontFamily: 'Montserrat, sans-serif', marginBottom: 8 }}>♥ Corazón</p>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                  {(perfume.notasCorazon || []).map((n, i) => (
+                    <span key={i} style={{ padding: '4px 10px', border: '1px solid #2a2a2a', color: '#ccc', fontSize: '0.7rem', fontFamily: 'Montserrat, sans-serif', borderRadius: 6 }}>{n}</span>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <p style={{ color: '#FFD700', fontSize: '0.6rem', letterSpacing: '0.15em', textTransform: 'uppercase', fontFamily: 'Montserrat, sans-serif', marginBottom: 8 }}>● Base</p>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6 }}>
+                  {(perfume.notasBase || []).map((n, i) => (
+                    <span key={i} style={{ padding: '4px 10px', border: '1px solid #2a2a2a', color: '#ccc', fontSize: '0.7rem', fontFamily: 'Montserrat, sans-serif', borderRadius: 6 }}>{n}</span>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Datos generales */}
+            <div style={{ background: '#111', border: '1px solid #1a1a1a', borderRadius: 12, padding: '24px', display: 'flex', flexDirection: 'column', gap: 16 }}>
+              <p style={{ color: '#555', fontSize: '0.6rem', letterSpacing: '0.2em', textTransform: 'uppercase', fontFamily: 'Montserrat, sans-serif', marginBottom: 0 }}>Datos de la Fragancia</p>
+              {[
+                { label: 'Familia', valor: perfume.familia },
+                { label: 'Proyección', valor: perfume.proyeccion },
+                { label: 'Duración', valor: perfume.duracion },
+                { label: 'Temporada', valor: perfume.temporada },
+                { label: 'Momento', valor: perfume.momento === 'dia' ? '☀️ Día' : perfume.momento === 'noche' ? '🌙 Noche' : '🔄 Versátil' },
+              ].map((item, i) => (
+                <div key={i} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderBottom: '1px solid #1a1a1a', paddingBottom: 10 }}>
+                  <span style={{ color: '#555', fontSize: '0.65rem', fontFamily: 'Montserrat, sans-serif', textTransform: 'uppercase', letterSpacing: '0.1em' }}>{item.label}</span>
+                  <span style={{ color: '#fff', fontSize: '0.8rem', fontFamily: 'Playfair Display, serif' }}>{item.valor}</span>
+                </div>
               ))}
             </div>
-          </div>
-        )}
 
-        {/* Best sellers */}
-        <div className="detail-related">
-          <h3 className="detail-related-title">Más Vendidos</h3>
-          <p className="detail-related-sub">Los favoritos de nuestros clientes</p>
-          <div className="detail-related-grid">
-            {masVendidos.map((p, i) => (
-              <MiniPerfumeCard key={i} perfume={p} onClick={() => {}} />
-            ))}
           </div>
         </div>
       </div>
