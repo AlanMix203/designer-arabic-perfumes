@@ -257,7 +257,13 @@ const Index = () => {
           <div className="modal-box" style={{ maxWidth: 1000, maxHeight: '85vh', overflowY: 'auto' }}>
             <button className="modal-close" onClick={() => setMarcaDetalleModal(false)}>✕</button>
             <p className="modal-top-tag">Colección</p>
-            <h2 className="section-title-sm" style={{ marginBottom: 4 }}>{marcaFiltro}</h2>
+            {marcaLogo ? (
+              <div className="marca-logo-header">
+                <img src={marcaLogo} alt={marcaFiltro} loading="lazy" className="marca-logo-img" />
+              </div>
+            ) : (
+              <h2 className="section-title-sm" style={{ marginBottom: 4 }}>{marcaFiltro}</h2>
+            )}
             <p className="modal-section-label" style={{ marginBottom: 24 }}>{perfumesDeMarca.length} perfume(s) disponibles</p>
             <div className="modal-divider"></div>
             <div className="mini-grid-4" style={{ padding: '0 0 20px' }}>
