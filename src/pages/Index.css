@@ -3363,6 +3363,10 @@ footer {
     grid-template-columns: repeat(2, 1fr);
   }
   .banner-image-section img {
-    height: 180px;
+    height: 220px;
+  }
+  .decants-info-images {
+    flex-direction: column;
+    align-items: center;
   }
 }
