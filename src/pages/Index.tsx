@@ -27,20 +27,20 @@ const perfumesFamosos = [
 ].filter(Boolean);
 
 const marcasDisenador = [
-  { nombre: "Carolina Herrera", iniciales: "CH" },
-  { nombre: "Jean Paul Gaultier", iniciales: "JPG" },
-  { nombre: "Versace", iniciales: "VS" },
-  { nombre: "Yves Saint Laurent", iniciales: "YSL" },
-  { nombre: "Azzaro", iniciales: "AZ" },
-  { nombre: "Valentino", iniciales: "VL" },
-  { nombre: "Ariana Grande", iniciales: "AG" },
-  { nombre: "Nautica", iniciales: "NT" },
+  { nombre: "Carolina Herrera", iniciales: "CH", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Carolina_Herrera_Logo.svg/300px-Carolina_Herrera_Logo.svg.png" },
+  { nombre: "Jean Paul Gaultier", iniciales: "JPG", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e6/Jean_Paul_Gaultier_logo.svg/300px-Jean_Paul_Gaultier_logo.svg.png" },
+  { nombre: "Versace", iniciales: "VS", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/35/Versace_logo.svg/300px-Versace_logo.svg.png" },
+  { nombre: "Yves Saint Laurent", iniciales: "YSL", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/YSL_Logo.svg/300px-YSL_Logo.svg.png" },
+  { nombre: "Azzaro", iniciales: "AZ", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Azzaro_logo.svg/300px-Azzaro_logo.svg.png" },
+  { nombre: "Valentino", iniciales: "VL", logo: "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f5/Valentino_Logo.svg/300px-Valentino_Logo.svg.png" },
+  { nombre: "Ariana Grande", iniciales: "AG", logo: null },
+  { nombre: "Nautica", iniciales: "NT", logo: null },
 ];
 
 const marcasArabes = [
-  { nombre: "Lattafa", iniciales: "LT" },
-  { nombre: "Afnan", iniciales: "AF" },
-  { nombre: "Armaf", iniciales: "AR" },
+  { nombre: "Lattafa", iniciales: "LT", logo: null },
+  { nombre: "Afnan", iniciales: "AF", logo: null },
+  { nombre: "Armaf", iniciales: "AR", logo: null },
 ];
 
 const Index = () => {
