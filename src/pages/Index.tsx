@@ -1,8 +1,12 @@
-import React, { useState, useMemo , useEffect} from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import HeroSection from "@/components/HeroSection";
 import MiniPerfumeCard from "@/components/MiniPerfumeCard";
 import PerfumeDetail from "@/components/PerfumeDetail";
+import AromasModal from "@/components/AromasModal";
+import DecantsInfo from "@/components/DecantsInfo";
+import EnvioInfo from "@/components/EnvioInfo";
+import bannerImg from "@/assets/banner-perfumes.png";
 import { perfumesMasculinos, perfumesFemeninos, perfumesArabesMasculinos, perfumesArabesFemeninos } from "@/data/categories";
 import './Index.css';
 
@@ -48,13 +52,17 @@ const Index = () => {
   const [marcaFiltro, setMarcaFiltro] = useState(null);
   const [categoriaActiva, setCategoriaActiva] = useState('disenador');
   const [marcasModal, setMarcasModal] = useState(false);
+  const [marcaDetalleModal, setMarcaDetalleModal] = useState(false);
+  const [aromasModal, setAromasModal] = useState(false);
+  const [decantsModal, setDecantsModal] = useState(false);
+  const [envioModal, setEnvioModal] = useState(false);
+  const [aromaFiltro, setAromaFiltro] = useState(null);
 
   useEffect(() => {
-  const fn = (e) => { if (e.key === 'Escape') setMarcasModal(false); };
-  window.addEventListener('keydown', fn);
-  return () => window.removeEventListener('keydown', fn);
- }, []);
-  const [marcaDetalleModal, setMarcaDetalleModal] = useState(false);
+    const fn = (e) => { if (e.key === 'Escape') { setMarcasModal(false); setAromasModal(false); setDecantsModal(false); setEnvioModal(false); }};
+    window.addEventListener('keydown', fn);
+    return () => window.removeEventListener('keydown', fn);
+  }, []);
 
   const toggleCarrito = () => setCarritoActivo(!carritoActivo);
 
@@ -93,10 +101,22 @@ const Index = () => {
     );
   }, [marcaFiltro]);
 
+  const perfumesDeAroma = useMemo(() => {
+    if (!aromaFiltro) return [];
+    return todosLosPerfumes.filter(p =>
+      (p.ingredientes || []).some(ing => ing.toLowerCase() === aromaFiltro.toLowerCase())
+    );
+  }, [aromaFiltro]);
+
   const handleMarcaClick = (nombre) => {
-  setMarcaFiltro(nombre);
-  setMarcasModal(false);
-  setMarcaDetalleModal(true);
+    setMarcaFiltro(nombre);
+    setMarcasModal(false);
+    setMarcaDetalleModal(true);
+  };
+
+  const handleAromaSelect = (nombre) => {
+    setAromaFiltro(nombre);
+    setAromasModal(false);
   };
 
   return (
@@ -116,8 +136,6 @@ const Index = () => {
 
       <header className="encabezado">
         <HeroSection />
-        <div className="texto-header">
-        </div>
       </header>
 
       {/* TOP RIGHT: Search + Cart */}
@@ -153,10 +171,42 @@ const Index = () => {
       <nav className="menu-extra menu-sticky">
         <a href="#inicio">Inicio</a>
         <a href="#marcas" onClick={(e) => { e.preventDefault(); setMarcasModal(true); }}>Marcas</a>
-        <a href="#decants">Decants</a>
+        <a href="#aromas" onClick={(e) => { e.preventDefault(); setAromasModal(true); }}>Aromas</a>
+        <a href="#decants" onClick={(e) => { e.preventDefault(); setDecantsModal(true); }}>¿Qué es un Decant?</a>
+        <a href="#envio" onClick={(e) => { e.preventDefault(); setEnvioModal(true); }}>Envío</a>
         <a href="#nosotros">Nosotros</a>
         <a href="#carrito" onClick={(e) => { e.preventDefault(); toggleCarrito(); }}>Carrito</a>
       </nav>
+
+      {/* BANNER IMAGE */}
+      <div className="banner-image-section">
+        <img src={bannerImg} alt="Colección de perfumes Parfam Avix" />
+      </div>
+
+      {/* CATEGORY TABS */}
+      <section className="category-tabs-section">
+        <div className="category-tabs">
+          <button className={`cat-tab ${categoriaActiva === 'disenador' ? 'cat-tab-active' : ''}`} onClick={() => setCategoriaActiva('disenador')}>Diseñador</button>
+          <button className={`cat-tab ${categoriaActiva === 'arabes' ? 'cat-tab-active' : ''}`} onClick={() => setCategoriaActiva('arabes')}>Árabes</button>
+          <button className={`cat-tab ${categoriaActiva === 'nicho' ? 'cat-tab-active' : ''}`} onClick={() => setCategoriaActiva('nicho')}>Nicho</button>
+        </div>
+      </section>
+
+      {/* AROMA FILTER RESULTS */}
+      {aromaFiltro && (
+        <section className="aroma-filter-section">
+          <div className="aroma-filter-header">
+            <span className="aroma-filter-tag">🌸 Aroma: {aromaFiltro}</span>
+            <p className="search-results-count">{perfumesDeAroma.length} perfume(s) con {aromaFiltro}</p>
+            <button className="aroma-clear-btn" onClick={() => setAromaFiltro(null)}>✕ Quitar filtro</button>
+          </div>
+          <div className="mini-grid-4">
+            {perfumesDeAroma.map((p, i) => (
+              <MiniPerfumeCard key={i} perfume={p} onClick={setPerfumeSeleccionado} onAgregar={agregarProductCard} />
+            ))}
+          </div>
+        </section>
+      )}
 
       {/* ===== CATEGORY CONTENT ===== */}
       {categoriaActiva === 'disenador' && (
@@ -216,33 +266,33 @@ const Index = () => {
         <div className="promo-inner">
           <span className="promo-tag">ENVÍO GRATIS</span>
           <h3>Envíos gratis en San Andrés Tuxtla</h3>
-          <p>Envíos nacionales disponibles · Entrega 1-2 días hábiles</p>
+          <p>Envíos nacionales por FedEx Express · Entrega 1-3 días hábiles</p>
         </div>
       </section>
 
       {/* ===== MARCA FILTRADA ===== */}
-     {marcaDetalleModal && marcaFiltro && (
-  <div className="modal-bg open" onClick={(e) => e.target === e.currentTarget && setMarcaDetalleModal(false)}>
-    <div className="modal-box" style={{ maxWidth: 1000, maxHeight: '85vh', overflowY: 'auto' }}>
-      <button className="modal-close" onClick={() => setMarcaDetalleModal(false)}>✕</button>
-      <p className="modal-top-tag">Colección</p>
-      <h2 className="section-title-sm" style={{ marginBottom: 4 }}>{marcaFiltro}</h2>
-      <p className="modal-section-label" style={{ marginBottom: 24 }}>{perfumesDeMarca.length} perfume(s) disponibles</p>
-      <div className="modal-divider"></div>
-      <div className="mini-grid-4" style={{ padding: '0 0 20px' }}>
-        {perfumesDeMarca.map((p, i) => (
-          <MiniPerfumeCard
-            key={i}
-            perfume={p}
-            onClick={(p) => { setMarcaDetalleModal(false); setPerfumeSeleccionado(p); }}
-            onAgregar={agregarProductCard}
-          />
-        ))}
-      </div>
-    </div>
-  </div>
-)}
-       
+      {marcaDetalleModal && marcaFiltro && (
+        <div className="modal-bg open" onClick={(e) => e.target === e.currentTarget && setMarcaDetalleModal(false)}>
+          <div className="modal-box" style={{ maxWidth: 1000, maxHeight: '85vh', overflowY: 'auto' }}>
+            <button className="modal-close" onClick={() => setMarcaDetalleModal(false)}>✕</button>
+            <p className="modal-top-tag">Colección</p>
+            <h2 className="section-title-sm" style={{ marginBottom: 4 }}>{marcaFiltro}</h2>
+            <p className="modal-section-label" style={{ marginBottom: 24 }}>{perfumesDeMarca.length} perfume(s) disponibles</p>
+            <div className="modal-divider"></div>
+            <div className="mini-grid-4" style={{ padding: '0 0 20px' }}>
+              {perfumesDeMarca.map((p, i) => (
+                <MiniPerfumeCard
+                  key={i}
+                  perfume={p}
+                  onClick={(p) => { setMarcaDetalleModal(false); setPerfumeSeleccionado(p); }}
+                  onAgregar={agregarProductCard}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* ===== PERFUMES MÁS FAMOSOS ===== */}
       <section className="famosos-section-compact">
         <p className="section-subtitle-sm">Los favoritos de nuestros clientes</p>
@@ -320,7 +370,7 @@ const Index = () => {
         <div className="location-content">
           <div className="location-info">
             <div className="location-item"><span className="location-icon">📍</span><div><h4>Dirección</h4><p>San Andrés Tuxtla, Veracruz, México</p></div></div>
-            <div className="location-item"><span className="location-icon">🚚</span><div><h4>Envíos</h4><p>Envíos gratis locales · Envíos nacionales</p></div></div>
+            <div className="location-item"><span className="location-icon">🚚</span><div><h4>Envíos</h4><p>Envíos gratis locales · Nacionales por FedEx Express</p></div></div>
             <div className="location-item"><span className="location-icon">⏰</span><div><h4>Horario</h4><p>Lunes a Sábado: 9:00 AM — 8:00 PM</p></div></div>
             <div className="location-item"><span className="location-icon">💬</span><div><h4>Contacto</h4><p>WhatsApp disponible</p></div></div>
           </div>
@@ -415,7 +465,7 @@ const Index = () => {
             <p className="modal-section-label">Diseñador</p>
             <div className="brands-grid" style={{ marginBottom: 28 }}>
               {marcasDisenador.map((m, i) => (
-                <div key={i} className="brand-card brand-clickable" onClick={() => { setMarcasModal(false); handleMarcaClick(m.nombre); }}>
+                <div key={i} className="brand-card brand-clickable" onClick={() => handleMarcaClick(m.nombre)}>
                   <div className="brand-logo-circle">{m.iniciales}</div>
                   <span className="brand-name">{m.nombre}</span>
                 </div>
@@ -425,7 +475,7 @@ const Index = () => {
             <p className="modal-section-label">Árabes</p>
             <div className="brands-grid">
               {marcasArabes.map((m, i) => (
-                <div key={i} className="brand-card brand-clickable" onClick={() => { setMarcasModal(false); handleMarcaClick(m.nombre); }}>
+                <div key={i} className="brand-card brand-clickable" onClick={() => handleMarcaClick(m.nombre)}>
                   <div className="brand-logo-circle brand-arab">{m.iniciales}</div>
                   <span className="brand-name">{m.nombre}</span>
                 </div>
@@ -435,6 +485,20 @@ const Index = () => {
         </div>
       )}
 
+      {/* MODAL AROMAS */}
+      {aromasModal && (
+        <AromasModal onClose={() => setAromasModal(false)} onSelectAroma={handleAromaSelect} />
+      )}
+
+      {/* MODAL DECANTS INFO */}
+      {decantsModal && (
+        <DecantsInfo onClose={() => setDecantsModal(false)} />
+      )}
+
+      {/* MODAL ENVÍO */}
+      {envioModal && (
+        <EnvioInfo onClose={() => setEnvioModal(false)} />
+      )}
 
       <footer>
         <div className="footer-content">
