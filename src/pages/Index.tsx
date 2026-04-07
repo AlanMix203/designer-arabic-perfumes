@@ -339,6 +339,34 @@ const Index = () => {
           <div className="feature-sm"><span>✦</span><h3>100% Originales</h3></div>
           <div className="feature-sm"><span>◈</span><h3>Decants Precisos</h3></div>
           <div className="feature-sm"><span>⬡</span><h3>Envío Discreto</h3></div>
+          <div className="feature-sm"><span>♦</span><h3>Atención Personal</h3></div>
+        </div>
+      </section>
+
+      {/* ===== ¿POR QUÉ ELEGIRNOS? ===== */}
+      <section className="porque-section">
+        <h2 className="section-title-sm">¿Por Qué Elegirnos?</h2>
+        <div className="porque-grid">
+          <div className="porque-card">
+            <span className="porque-icon">🔬</span>
+            <h4>Precisión en cada Decant</h4>
+            <p>Medimos cada mililitro con jeringa de precisión para que recibas exactamente lo que pides.</p>
+          </div>
+          <div className="porque-card">
+            <span className="porque-icon">🏷️</span>
+            <h4>Precios Accesibles</h4>
+            <p>Prueba perfumes de $3,000-$8,000 MXN desde solo $60 pesos con nuestros decants.</p>
+          </div>
+          <div className="porque-card">
+            <span className="porque-icon">📦</span>
+            <h4>Empaque Premium</h4>
+            <p>Cada decant va sellado, etiquetado y protegido individualmente contra derrames.</p>
+          </div>
+          <div className="porque-card">
+            <span className="porque-icon">💎</span>
+            <h4>Variedad Exclusiva</h4>
+            <p>Más de 50 fragancias de diseñador y árabes para explorar sin gastar una fortuna.</p>
+          </div>
         </div>
       </section>
 
@@ -347,7 +375,38 @@ const Index = () => {
         <div className="promo-inner">
           <span className="promo-tag">¿NO SABES QUÉ ELEGIR?</span>
           <h3>Escríbenos por WhatsApp y te asesoramos</h3>
-          <p>Te ayudamos a encontrar la fragancia perfecta para ti</p>
+          <p>Te ayudamos a encontrar la fragancia perfecta para ti · Asesoría gratuita</p>
+        </div>
+      </section>
+
+      {/* ===== CÓMO FUNCIONA ===== */}
+      <section className="como-funciona-section">
+        <h2 className="section-title-sm">¿Cómo Funciona?</h2>
+        <p className="section-subtitle-sm">Comprar tu decant es muy sencillo</p>
+        <div className="como-pasos">
+          <div className="como-paso">
+            <div className="como-paso-num">1</div>
+            <h4>Elige tus fragancias</h4>
+            <p>Explora nuestro catálogo y selecciona los perfumes que te interesen.</p>
+          </div>
+          <div className="como-paso-arrow">→</div>
+          <div className="como-paso">
+            <div className="como-paso-num">2</div>
+            <h4>Selecciona el tamaño</h4>
+            <p>Elige entre 2ml, 5ml, 10ml o 30ml según tu preferencia.</p>
+          </div>
+          <div className="como-paso-arrow">→</div>
+          <div className="como-paso">
+            <div className="como-paso-num">3</div>
+            <h4>Realiza tu pedido</h4>
+            <p>Agrégalos al carrito o contáctanos por WhatsApp.</p>
+          </div>
+          <div className="como-paso-arrow">→</div>
+          <div className="como-paso">
+            <div className="como-paso-num">4</div>
+            <h4>Recibe en tu puerta</h4>
+            <p>Envío por FedEx Express a toda la República Mexicana.</p>
+          </div>
         </div>
       </section>
 
