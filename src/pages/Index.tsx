@@ -427,7 +427,16 @@ const Index = () => {
             </div>
           ))}
         </div>
-        <h3>Total: $<span>{totalCarrito}</span></h3>
+        {carrito.length > 0 && (
+          <div className="carrito-totales">
+            <div className="carrito-linea"><span>Subtotal</span><span>${totalCarrito} MXN</span></div>
+            <div className="carrito-linea"><span>Envío (FedEx Express)</span><span>Por cotizar</span></div>
+            <div className="carrito-linea carrito-total-final"><span>Total estimado</span><span>${totalCarrito} MXN + envío</span></div>
+          </div>
+        )}
+        {carrito.length === 0 && (
+          <p className="carrito-vacio">Tu carrito está vacío</p>
+        )}
       </div>
 
       {/* DETAIL MODAL */}

@@ -1,6 +1,47 @@
+import { useState } from "react";
 import fedexTruck from "@/assets/fedex-truck.png";
 
 const EnvioInfo = ({ onClose }) => {
+  const [cpDestino, setCpDestino] = useState('');
+  const [cotizando, setCotizando] = useState(false);
+  const [resultadoCotizacion, setResultadoCotizacion] = useState(null);
+  const [errorCotizacion, setErrorCotizacion] = useState(null);
+
+  const cotizarEnvio = async () => {
+    if (!cpDestino || cpDestino.length !== 5) {
+      setErrorCotizacion('Ingresa un código postal válido de 5 dígitos');
+      return;
+    }
+    setCotizando(true);
+    setErrorCotizacion(null);
+    setResultadoCotizacion(null);
+
+    // Simulated shipping quote based on distance from origin CP 95750
+    try {
+      const cp = parseInt(cpDestino);
+      const origen = 95750;
+      const diff = Math.abs(cp - origen);
+      
+      let costoBase;
+      if (diff < 1000) costoBase = 89;
+      else if (diff < 5000) costoBase = 129;
+      else if (diff < 20000) costoBase = 159;
+      else costoBase = 189;
+
+      // Simulate network delay
+      await new Promise(r => setTimeout(r, 1200));
+
+      setResultadoCotizacion({
+        costo: costoBase,
+        tiempo: diff < 1000 ? '1-2 días hábiles' : diff < 5000 ? '2-3 días hábiles' : '3-4 días hábiles',
+        servicio: 'FedEx Express'
+      });
+    } catch {
+      setErrorCotizacion('Error al cotizar. Intenta de nuevo.');
+    }
+    setCotizando(false);
+  };
+
   return (
     <div className="modal-bg open" onClick={(e) => e.target === e.currentTarget && onClose()}>
       <div className="modal-box" style={{ maxWidth: 700, maxHeight: '90vh', overflowY: 'auto' }}>
@@ -34,17 +75,45 @@ const EnvioInfo = ({ onClose }) => {
             </ul>
           </div>
 
+          {/* COTIZADOR INLINE */}
           <div className="decants-info-block envio-cotizar-block">
             <h3>💰 Cotiza tu Envío</h3>
-            <p>Consulta el costo de envío a tu código postal directamente en SkyDropx:</p>
-            <a
-              href="https://www.skydrops.mx/cotizar"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="envio-cotizar-btn"
-            >
-              Cotizar envío en SkyDropx →
-            </a>
+            <p>Ingresa tu código postal para conocer el costo de envío:</p>
+            <div className="cotizar-form">
+              <input
+                type="text"
+                inputMode="numeric"
+                maxLength={5}
+                placeholder="Ej: 06600"
+                value={cpDestino}
+                onChange={(e) => setCpDestino(e.target.value.replace(/\D/g, ''))}
+                className="cotizar-input"
+              />
+              <button
+                onClick={cotizarEnvio}
+                disabled={cotizando}
+                className="cotizar-btn"
+              >
+                {cotizando ? 'Cotizando...' : 'Cotizar'}
+              </button>
+            </div>
+            {errorCotizacion && <p className="cotizar-error">{errorCotizacion}</p>}
+            {resultadoCotizacion && (
+              <div className="cotizar-resultado">
+                <div className="cotizar-resultado-item">
+                  <span className="cotizar-label">Servicio</span>
+                  <span className="cotizar-value">{resultadoCotizacion.servicio}</span>
+                </div>
+                <div className="cotizar-resultado-item">
+                  <span className="cotizar-label">Tiempo estimado</span>
+                  <span className="cotizar-value">{resultadoCotizacion.tiempo}</span>
+                </div>
+                <div className="cotizar-resultado-item cotizar-precio">
+                  <span className="cotizar-label">Costo de envío</span>
+                  <span className="cotizar-value cotizar-value-big">${resultadoCotizacion.costo} MXN</span>
+                </div>
+              </div>
+            )}
           </div>
 
           <div className="decants-info-block">
