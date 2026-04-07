@@ -1703,24 +1703,25 @@ footer {
   }
 }
 
-/* ===== MINI GRID 4 COLUMNS ===== */
+/* ===== MINI GRID 5 COLUMNS ===== */
 .mini-grid-4 {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-  max-width: 1200px;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+  max-width: 1300px;
   margin: 20px auto 0;
   padding: 0 20px;
 }
 
 /* ===== MINI CARD (Redesigned) ===== */
 .mini-card {
-  background: #111;
+  background: #0e0e0e;
   border: 1px solid #1a1a1a;
-  border-radius: 16px;
+  border-radius: 12px;
   cursor: pointer;
   transition: all 0.3s ease;
   overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
 }
 
 .mini-card:hover {
@@ -1731,11 +1732,11 @@ footer {
 
 .mini-card-img {
   width: 100%;
-  height: 220px;
+  height: 160px;
   overflow: hidden;
   position: relative;
   background: #0a0a0a;
-  border-radius: 16px 16px 0 0;
+  border-radius: 12px 12px 0 0;
 }
 
 .mini-card-img img {
@@ -1760,7 +1761,7 @@ footer {
 }
 
 .mini-card-info {
-  padding: 16px;
+  padding: 10px 12px 12px;
   text-align: center;
 }
 
@@ -1775,10 +1776,13 @@ footer {
 
 .mini-card-name {
   font-family: 'Playfair Display', serif;
-  font-size: 1rem;
+  font-size: 0.85rem;
   color: #fff;
   font-weight: 600;
-  margin: 0 0 4px;
+  margin: 0 0 3px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .mini-card-stars {
@@ -3039,14 +3043,14 @@ footer {
 /* ===== BANNER IMAGE ===== */
 .banner-image-section {
   width: 100%;
-  max-height: 350px;
+  max-height: 420px;
   overflow: hidden;
   border-bottom: 1px solid #1a1a1a;
 }
 
 .banner-image-section img {
   width: 100%;
-  height: 350px;
+  height: 420px;
   object-fit: cover;
   object-position: center;
   display: block;
