@@ -3490,10 +3490,134 @@ footer {
     grid-template-columns: repeat(2, 1fr);
   }
   .banner-image-section img {
-    height: 220px;
+    height: 280px;
   }
   .decants-info-images {
     flex-direction: column;
     align-items: center;
   }
+  .porque-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  .como-pasos {
+    flex-direction: column;
+    gap: 16px;
+  }
+  .como-paso-arrow {
+    display: none;
+  }
+  .mini-grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+}
+
+/* ===== ¿POR QUÉ ELEGIRNOS? ===== */
+.porque-section {
+  padding: 50px 20px;
+  background: #0c0c0c;
+  text-align: center;
+}
+
+.porque-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  max-width: 1100px;
+  margin: 24px auto 0;
+}
+
+.porque-card {
+  background: rgba(255,255,255,0.02);
+  border: 1px solid #1a1a1a;
+  border-radius: 12px;
+  padding: 28px 20px;
+  transition: all 0.3s;
+}
+
+.porque-card:hover {
+  border-color: #333;
+  transform: translateY(-3px);
+}
+
+.porque-icon {
+  font-size: 2rem;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.porque-card h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  color: #fff;
+  font-weight: 400;
+  margin: 0 0 8px;
+}
+
+.porque-card p {
+  color: #777;
+  font-size: 0.75rem;
+  font-family: 'Montserrat', sans-serif;
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ===== CÓMO FUNCIONA ===== */
+.como-funciona-section {
+  padding: 50px 20px;
+  background: #0a0a0a;
+  text-align: center;
+  border-top: 1px solid #1a1a1a;
+}
+
+.como-pasos {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 12px;
+  max-width: 1100px;
+  margin: 24px auto 0;
+}
+
+.como-paso {
+  flex: 1;
+  max-width: 220px;
+  text-align: center;
+}
+
+.como-paso-num {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid #FFD700;
+  color: #FFD700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  margin: 0 auto 12px;
+}
+
+.como-paso h4 {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.95rem;
+  color: #fff;
+  font-weight: 400;
+  margin: 0 0 6px;
+}
+
+.como-paso p {
+  color: #777;
+  font-size: 0.72rem;
+  font-family: 'Montserrat', sans-serif;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.como-paso-arrow {
+  color: #333;
+  font-size: 1.5rem;
+  margin-top: 8px;
+  flex-shrink: 0;
 }
