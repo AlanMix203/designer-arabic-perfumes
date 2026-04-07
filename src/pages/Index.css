@@ -2427,6 +2427,12 @@ footer {
   }
 }
 
+@media (max-width: 1200px) {
+  .mini-grid-4 {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
 @media (max-width: 768px) {
   .mini-grid-4 {
     grid-template-columns: repeat(2, 1fr);
@@ -3104,30 +3110,147 @@ footer {
   text-transform: uppercase;
 }
 
-/* ===== ENVIO COTIZAR ===== */
-.envio-cotizar-block {
-  text-align: center;
+/* ===== COTIZADOR INLINE ===== */
+.cotizar-form {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin: 16px 0 12px;
 }
 
-.envio-cotizar-btn {
-  display: inline-block;
-  margin-top: 12px;
+.cotizar-input {
+  padding: 12px 16px;
+  background: #111;
+  border: 1px solid #333;
+  color: #fff;
+  font-size: 0.9rem;
+  font-family: 'Montserrat', sans-serif;
+  border-radius: 8px;
+  width: 160px;
+  text-align: center;
+  letter-spacing: 0.2em;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.cotizar-input:focus {
+  border-color: #FFD700;
+  box-shadow: 0 0 10px rgba(255,215,0,0.1);
+}
+
+.cotizar-input::placeholder {
+  color: #555;
+  letter-spacing: 0.05em;
+}
+
+.cotizar-btn {
   padding: 12px 28px;
-  background: #4D148C;
-  color: #FF6600;
+  background: #fff;
+  color: #080808;
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
   font-size: 0.8rem;
   letter-spacing: 0.08em;
   border-radius: 8px;
-  text-decoration: none;
+  border: none;
+  cursor: pointer;
   transition: all 0.3s;
+  text-transform: uppercase;
 }
 
-.envio-cotizar-btn:hover {
-  background: #5D249C;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(77, 20, 140, 0.4);
+.cotizar-btn:hover {
+  background: #FFD700;
+}
+
+.cotizar-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.cotizar-error {
+  color: #ff6b6b;
+  font-size: 0.75rem;
+  font-family: 'Montserrat', sans-serif;
+  margin-top: 8px;
+  text-align: center;
+}
+
+.cotizar-resultado {
+  margin-top: 16px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid #2a2a2a;
+  border-radius: 12px;
+  padding: 16px 20px;
+}
+
+.cotizar-resultado-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid #1a1a1a;
+}
+
+.cotizar-resultado-item:last-child {
+  border-bottom: none;
+}
+
+.cotizar-label {
+  color: #888;
+  font-size: 0.75rem;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.cotizar-value {
+  color: #fff;
+  font-size: 0.8rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+}
+
+.cotizar-value-big {
+  color: #FFD700;
+  font-size: 1rem;
+}
+
+.cotizar-precio {
+  background: rgba(255,215,0,0.05);
+  border-radius: 8px;
+  padding: 12px !important;
+  margin-top: 4px;
+}
+
+/* ===== CARRITO TOTALES ===== */
+.carrito-totales {
+  margin-top: 20px;
+  padding-top: 16px;
+  border-top: 1px solid #2a2a2a;
+}
+
+.carrito-linea {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.8rem;
+  color: #999;
+}
+
+.carrito-total-final {
+  border-top: 1px solid #333;
+  margin-top: 8px;
+  padding-top: 12px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 0.9rem;
+}
+
+.carrito-vacio {
+  color: #555;
+  font-size: 0.85rem;
+  font-family: 'Montserrat', sans-serif;
+  text-align: center;
+  margin-top: 40px;
+  letter-spacing: 0.1em;
 }
 
 /* ===== AROMAS ===== */
