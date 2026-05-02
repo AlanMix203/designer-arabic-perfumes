@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState, useMemo, useEffect, useRef} from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import HeroSection from "@/components/HeroSection";
 import MiniPerfumeCard from "@/components/MiniPerfumeCard";
@@ -44,6 +44,9 @@ const marcasArabes = [
 ];
 
 const Index = () => {
+  const [scrolled, setScrolled] = useState(false);
+const headerRef = useRef(null);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const navigate = useNavigate();
   const [carrito, setCarrito] = useState([]);
   const [carritoActivo, setCarritoActivo] = useState(false);
@@ -64,6 +67,14 @@ const Index = () => {
     return () => window.removeEventListener('keydown', fn);
   }, []);
 
+ useEffect(() => {
+  const handleScroll = () => {
+    const headerHeight = headerRef.current?.offsetHeight || 0;
+    setScrolled(window.scrollY >= headerHeight);
+  };
+  window.addEventListener('scroll', handleScroll);
+  return () => window.removeEventListener('scroll', handleScroll);
+}, []);
   const toggleCarrito = () => setCarritoActivo(!carritoActivo);
 
   const agregarProductCard = (nombre, precio, texto, cantidad) => {
@@ -126,31 +137,32 @@ const Index = () => {
 
       <div className="top-bar">
         <div className="texto-movimiento">
-          <span>DECANTS DE PERFUME DE DISEÑADOR Y ÁRABES</span>
+          <span>DECANTS MASCULINOS Y FEMENINOS DE DISEÑADOR , ÁRABES Y NICHO</span>
           <span>ENVÍOS GRATIS EN SAN ANDRÉS TUXTLA</span>
-          <span>DECANTS DE DISEÑADOR Y ÁRABES</span>
           <span>PARFAM AVIX</span>
           <span>ENVÍOS NACIONALES</span>
           <span>100% ORIGINAL</span>
+          <span>DECANTS MASCULINOS Y FEMENINOS DE DISEÑADOR , ÁRABES Y NICHO</span>
         </div>
       </div>
 
-      <header className="encabezado">
+      <header  ref={headerRef} className="encabezado">
         <HeroSection />
       </header>
 
-      {/* TOP RIGHT: Search + Cart */}
-      <div className="top-actions">
-        <div className="top-search-bar">
-          <span className="search-icon-sm">🔍</span>
-          <input type="text" placeholder="Buscar perfume..."
-            value={busqueda} onChange={(e) => setBusqueda(e.target.value)} />
-          {busqueda && <button className="search-clear-sm" onClick={() => setBusqueda('')}>✕</button>}
-        </div>
-        <button className="btn-carrito" onClick={toggleCarrito}>
-          🛒 ({carrito.length})
-        </button>
-      </div>
+      {/* Buscador y carrito fijos - RESTAURAR */}
+<div className={`top-actions ${scrolled ? 'top-actions-fixed' : ''}`}>
+  <div className="top-search-bar">
+    <span className="search-icon-sm">🔍</span>
+    <input type="text" placeholder="Buscar"
+      value={busqueda} onChange={(e) => setBusqueda(e.target.value)} />
+    {busqueda && <button className="search-clear-sm" onClick={() => setBusqueda('')}>✕</button>}
+  </div>
+  <button className="btn-carrito" onClick={toggleCarrito}>
+    🛒 ({carrito.length})
+  </button>
+</div>
+
 
       {/* Search results dropdown */}
       {resultadosBusqueda.length > 0 && (
@@ -169,15 +181,31 @@ const Index = () => {
         </div>
       )}
 
-      <nav className="menu-extra menu-sticky">
-        <a href="#inicio">Inicio</a>
-        <a href="#marcas" onClick={(e) => { e.preventDefault(); setMarcasModal(true); }}>Marcas</a>
-        <a href="#aromas" onClick={(e) => { e.preventDefault(); setAromasModal(true); }}>Aromas</a>
-        <a href="#decants" onClick={(e) => { e.preventDefault(); setDecantsModal(true); }}>¿Qué es un Decant?</a>
-        <a href="#envio" onClick={(e) => { e.preventDefault(); setEnvioModal(true); }}>Envío</a>
-        <a href="#nosotros">Nosotros</a>
-        <a href="#carrito" onClick={(e) => { e.preventDefault(); toggleCarrito(); }}>Carrito</a>
-      </nav>
+   <nav  className={`menu-extra ${scrolled ? 'menu-sticky-active' : ''}`}>
+    
+    <div className="nav-item-dropdown"
+    onMouseEnter={() => setDropdownOpen(true)}
+    onMouseLeave={() => setDropdownOpen(false)}
+  >
+    <a href="#">Perfume</a>
+    {dropdownOpen && (
+      <div className="nav-dropdown">
+        <a onClick={() => navigate('/masculino-disenador')}>Diseñador Masculino</a>
+        <a onClick={() => navigate('/femenino-disenador')}>Diseñador Femenino</a>
+        <a onClick={() => navigate('/masculino-arabe')}>Árabe Masculino</a>
+        <a onClick={() => navigate('/femenino-arabe')}>Árabe Femenino</a>
+        <a onClick={() => {}}>Nicho Masculino</a>
+        <a onClick={() => {}}>Nicho Femenino</a>
+      </div>
+    )}
+  </div>
+  <a onClick={(e) => { e.preventDefault(); setMarcasModal(true); }}>Marcas</a>
+  <a onClick={(e) => { e.preventDefault(); setAromasModal(true); }}>Aromas</a>
+  <a onClick={(e) => { e.preventDefault(); setDecantsModal(true); }}>¿Qué es un Decant?</a>
+  <a onClick={(e) => { e.preventDefault(); setEnvioModal(true); }}>Envío</a>
+  <a href="#nosotros">Nosotros</a>
+  <a href="#Genero">Género</a>
+</nav>
 
       {/* BANNER IMAGE */}
       <div className="banner-image-section">
